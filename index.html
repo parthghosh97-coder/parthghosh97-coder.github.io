@@ -4,104 +4,112 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Parth Ghosh • Business Analytics Portfolio</title>
-  <meta name="description" content="Business Analytics portfolio: Python, SQL, Power BI, Tableau, SPSS, forecasting, dashboards." />
   <style>
-    :root {
-      --bg:#0b0f19; --card:#111827; --muted:#9ca3af; --text:#e5e7eb;
-      --border:#1f2937; --chip:#0f1626;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
-    a{color:#60a5fa;text-decoration:none} a:hover{text-decoration:underline}
-    .wrap{max-width:980px;margin:0 auto;padding:28px 20px 64px}
-    header{display:flex;align-items:center;gap:18px;padding:18px;border:1px solid var(--border);border-radius:16px;background:linear-gradient(180deg,rgba(17,24,39,.85),rgba(17,24,39,.6))}
-    .avatar{width:64px;height:64px;border-radius:50%;border:2px solid var(--border);object-fit:cover;background:#222}
-    h1{margin:0;font-size:28px;letter-spacing:.2px}
-    .subtitle{margin-top:4px;color:var(--muted);font-size:15px}
-    section{margin-top:26px;border:1px solid var(--border);border-radius:16px;background:var(--card)}
-    .section-title{padding:16px 18px;border-bottom:1px solid var(--border);font-weight:600;background:rgba(255,255,255,.02)}
+    body {margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto;background:#0b0f19;color:#e5e7eb}
+    a{color:#60a5fa;text-decoration:none}a:hover{text-decoration:underline}
+    .wrap{max-width:1000px;margin:0 auto;padding:28px 20px 64px}
+    header{display:flex;align-items:center;gap:18px;padding:18px;border:1px solid #1f2937;border-radius:16px;background:linear-gradient(180deg,rgba(17,24,39,.85),rgba(17,24,39,.6))}
+    .avatar{width:72px;height:72px;border-radius:50%;border:2px solid #1f2937;object-fit:cover}
+    h1{margin:0;font-size:28px}
+    .subtitle{margin-top:4px;color:#9ca3af;font-size:15px}
+    .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+    .row a{border:1px solid #1f2937;background:#111827;padding:8px 12px;border-radius:10px}
+    section{margin-top:26px;border:1px solid #1f2937;border-radius:16px;background:#111827}
+    .section-title{padding:16px 18px;border-bottom:1px solid #1f2937;font-weight:600;background:rgba(255,255,255,.02)}
     .section-body{padding:18px}
     .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
-    .col-12{grid-column:span 12} .col-6{grid-column:span 12}
-    @media(min-width:760px){.col-6{grid-column:span 6}}
-    .card{border:1px solid var(--border);border-radius:14px;padding:16px;background:#0d1422;display:flex;flex-direction:column;gap:8px}
+    .col-12{grid-column:span 12}.col-6{grid-column:span 12}@media(min-width:760px){.col-6{grid-column:span 6}}
+    .card{border:1px solid #1f2937;border-radius:14px;padding:16px;background:#0d1422;display:flex;flex-direction:column;gap:8px}
     .card h3{margin:0 0 2px;font-size:18px}
-    .card p{margin:0;color:var(--muted);font-size:14px}
-    .meta{font-size:12px;color:var(--muted)}
-    .pills{display:flex;gap:10px;flex-wrap:wrap}
-    .pill{padding:8px 12px;border:1px solid var(--border);border-radius:999px;background:var(--chip);font-size:13px}
-    footer{margin-top:26px;text-align:center;color:var(--muted);font-size:13px}
-    .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
-    .row a{border:1px solid var(--border);background:var(--chip);padding:8px 12px;border-radius:10px}
+    .card p{margin:0;color:#9ca3af;font-size:14px}
+    .meta{font-size:12px;color:#9ca3af}
+    .pill{padding:8px 12px;border:1px solid #1f2937;border-radius:999px;background:#0f1626;font-size:13px}
+    footer{margin-top:26px;text-align:center;color:#9ca3af;font-size:13px}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <!-- Replace src with your real GitHub avatar if you want -->
-      <img class="avatar" src="https://avatars.githubusercontent.com/u/0?v=4" alt="Parth Ghosh avatar" />
-      <div>
-        <h1>Parth Ghosh</h1>
-        <div class="subtitle">Business Analytics • Data Science • Data Visualization</div>
-        <div class="row">
-          <a href="mailto:parthghosh97@gmail.com">Email</a>
-          <a href="https://www.linkedin.com/in/parth-ghosh-736669226" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a href="#projects">Projects</a>
-        </div>
+<div class="wrap">
+  <header>
+    <img class="avatar" src="./headshot.jpg" alt="Parth Ghosh profile photo" />
+    <div>
+      <h1>Parth Ghosh</h1>
+      <div class="subtitle">Business Analytics • Data Science • Visualization</div>
+      <div class="row">
+        <a href="mailto:parthghosh97@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/parth-ghosh-736669226" target="_blank">LinkedIn</a>
+        <a href="#resume">Resume</a>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <section id="about">
-      <div class="section-title">About</div>
-      <div class="section-body">
-        I’m a Master’s in Business Analytics graduate who turns data into decisions with Python, SQL, Power BI, Tableau, and SPSS—blending modeling with clear, business-first storytelling.
+  <section id="about">
+    <div class="section-title">About</div>
+    <div class="section-body">I’m a Master’s in Business Analytics graduate skilled in Python, SQL, Power BI, Tableau, and SPSS. I build predictive models, dashboards, and data strategies that drive business impact.</div>
+  </section>
+
+  <section id="experience">
+    <div class="section-title">Experience</div>
+    <div class="section-body">
+      <div class="grid">
+        <div class="col-6"><div class="card"><h3>Testing Engineer</h3><p>Siemens India Ltd • 2021–2023</p><p>Designed electrical component test setups, analyzed data for reliability, and collaborated with teams to optimize cost and quality.</p><div class="meta">🔧 Testing • 📊 Data Analysis • 🤝 Collaboration</div></div></div>
+        <div class="col-6"><div class="card"><h3>Trainee Engineer</h3><p>Ultimate Power Tech • 2021</p><p>Supported EV charger component design, performed analytics on power electronics systems, and improved design efficiency.</p><div class="meta">⚡ Power Electronics • 🧪 R&D</div></div></div>
+        <div class="col-6"><div class="card"><h3>Master’s in Business Analytics</h3><p>Hult International Business School • 2024–2025</p><p>Hands-on projects in marketing analytics, machine learning, forecasting, and BI tools (Power BI, Tableau, SPSS).</p><div class="meta">🎓 Analytics • 📈 BI • 🤝 Team Projects</div></div></div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="projects">
-      <div class="section-title">Projects</div>
-      <div class="section-body">
-        <div class="grid">
+  <section id="resume">
+    <div class="section-title">Resume</div>
+    <div class="section-body">
+      <p>Upload your resume as <code>resume.pdf</code> in this repo to enable this link.</p>
+      <p><a href="./resume.pdf" target="_blank"><span class="pill">📄 View Resume (PDF)</span></a></p>
+    </div>
+  </section>
 
-          <div class="col-12"><h2>📊 Business Case Studies</h2></div>
-          <div class="col-6"><div class="card"><h3>Expedia Expansion Project</h3><p>Analytics-driven global expansion strategy with competitive insights and growth recommendations.</p><div class="meta">💼 Strategy | 📊 Analytics | 🌍 Consulting</div></div></div>
-          <div class="col-6"><div class="card"><h3>Air France Video Analysis</h3><p>Digital advertising ROI analysis with data-backed recommendations.</p><div class="meta">📈 Marketing Analytics | 📝 Case Study</div></div></div>
-          <div class="col-6"><div class="card"><h3>Pillsbury Cookie Challenge</h3><p>Consumer insights and perceptual mapping to guide product strategy.</p><div class="meta">📊 SPSS | 🎯 Segmentation | 🗺️ Perceptual Maps</div></div></div>
-          <div class="col-6"><div class="card"><h3>Qantas Personalization Study</h3><p>Seamless personalization frameworks and customer analytics.</p><div class="meta">✈️ Customer Analytics | 📚 Case Study</div></div></div>
-          <div class="col-6"><div class="card"><h3>Shiva Tourist Dhaba Loyalty</h3><p>Loyalty strategy supported by SPSS and discriminant models.</p><div class="meta">📊 SPSS | 🤝 Loyalty | 📈 Strategy</div></div></div>
-          <div class="col-6"><div class="card"><h3>HAEE Sales Strategy Report</h3><p>Executive-style recommendations to improve visibility and sales.</p><div class="meta">💼 Consulting | 📊 Strategy | 📈 Sales</div></div></div>
+  <section id="projects">
+    <div class="section-title">Projects</div>
+    <div class="section-body">
+      <div class="grid">
 
-          <div class="col-12"><h2>🧑‍💻 Data Science & Python Projects</h2></div>
-          <div class="col-6"><div class="card"><h3>Bay Wheels Dock Saturation</h3><p>Predictive modeling for station saturation and optimization.</p><div class="meta">🐍 Python | 🤖 Modeling | ⚙️ Feature Engineering</div></div></div>
-          <div class="col-6"><div class="card"><h3>Cluster Analysis</h3><p>Unsupervised segmentation to reveal actionable patterns.</p><div class="meta">📊 R | 🐍 Python | 🔍 Clustering | 📈 PCA</div></div></div>
-          <div class="col-6"><div class="card"><h3>Facebook Live PCA & Clustering</h3><p>Components and clusters explaining engagement drivers.</p><div class="meta">📊 R | 📈 PCA | 🔍 Clustering | 🤖 Logistic Regression</div></div></div>
-          <div class="col-6"><div class="card"><h3>Nike Discriminant Analysis</h3><p>Classifying usage groups using awareness and loyalty measures.</p><div class="meta">📊 SPSS | 🎯 Discriminant Analysis</div></div></div>
-          <div class="col-6"><div class="card"><h3>Grocery Getters Linear Modeling</h3><p>Revenue prediction with engineered features and model selection.</p><div class="meta">🐍 Python | 📈 Regression | 📊 Modeling</div></div></div>
-          <div class="col-6"><div class="card"><h3>RH Unlimited Delivery Optimization</h3><p>Routing and scheduling improvements for on-time, low-cost delivery.</p><div class="meta">🐍 Python | 🚚 Optimization | ⚙️ Operations</div></div></div>
-          <div class="col-6"><div class="card"><h3>Furniture Database Analysis</h3><p>Operations insights from delivery and logistics data.</p><div class="meta">🗄️ SQL | 📊 Database Analysis | ⚙️ Operations</div></div></div>
-          <div class="col-6"><div class="card"><h3>Jungle Book Adventure Game</h3><p>Interactive game demonstrating OOP fundamentals.</p><div class="meta">🐍 Python | 🎮 Game Dev | 🏗️ OOP</div></div></div>
-          <div class="col-6"><div class="card"><h3>Python Assessment Project</h3><p>Data structures, functions, and problem-solving challenges.</p><div class="meta">🐍 Python | 📚 Data Structures | 🔢 Problem Solving</div></div></div>
+<!-- Projects Grid From Your Current Version -->
 
-          <div class="col-12"><h2>📈 Visualization Dashboards</h2></div>
-          <div class="col-6"><div class="card"><h3>Facebook Marketing Dashboard</h3><p>Engagement, reach, and content performance tracking.</p><div class="meta">📊 Power BI | 📈 Visualization</div></div></div>
-          <div class="col-6"><div class="card"><h3>Reddit Dashboard Analysis</h3><p>Campaign conversations and user engagement metrics.</p><div class="meta">📊 Tableau | 📊 Power BI | 📈 Visualization</div></div></div>
-          <div class="col-6"><div class="card"><h3>Montgomery Boundary Box</h3><p>UHI geospatial analysis with Python + Tableau visuals.</p><div class="meta">🐍 Python | 🌍 Geospatial | 📊 Tableau</div></div></div>
-          <div class="col-6"><div class="card"><h3>Whaleport Sustainable Energy</h3><p>Big data analytics for renewable energy & SDGs.</p><div class="meta">🌱 Sustainability | 📊 Big Data | ⚡ Energy</div></div></div>
-          <div class="col-6"><div class="card"><h3>Sales Forecasting Model</h3><p>Time-series demand forecasting for inventory decisions.</p><div class="meta">📊 Excel | 🐍 Python | ⏳ Time Series</div></div></div>
+<div class="col-12"><h2>📊 Business Case Studies</h2></div>
+<div class="col-6"><div class="card"><h3>Expedia Expansion Project</h3><p>Analytics-driven global expansion strategy for Expedia with competitive landscape insights and growth recommendations.</p><div class="meta">💼 Strategy | 📊 Analytics | 🌍 Consulting</div></div></div>
+<div class="col-6"><div class="card"><h3>Air France Video Analysis</h3><p>Case study and data-driven analysis of Air France’s digital advertising strategy with ROI evaluation and recommendations.</p><div class="meta">📈 Marketing Analytics | 📝 Case Study</div></div></div>
+<div class="col-6"><div class="card"><h3>Pillsbury Cookie Challenge</h3><p>Consumer insights and perceptual mapping with SPSS to support brand and product strategy.</p><div class="meta">📊 SPSS | 🎯 Segmentation | 🗺️ Perceptual Maps</div></div></div>
+<div class="col-6"><div class="card"><h3>Qantas Personalization Study</h3><p>Case based analytics on seamless personalization using customer experience data and frameworks.</p><div class="meta">✈️ Customer Analytics | 📚 Case Study</div></div></div>
+<div class="col-6"><div class="card"><h3>Shiva Tourist Dhaba Loyalty</h3><p>Market research and loyalty strategy supported by SPSS analysis and discriminant models.</p><div class="meta">📊 SPSS | 🤝 Loyalty | 📈 Strategy</div></div></div>
+<div class="col-6"><div class="card"><h3>HAEE Sales Strategy Report</h3><p>Executive style analysis and recommendations to improve visibility and sales in the Americas.</p><div class="meta">💼 Consulting | 📊 Strategy | 📈 Sales</div></div></div>
 
-          <div class="col-12"><h2>📚 Simulations & Go-To-Market</h2></div>
-          <div class="col-6"><div class="card"><h3>Darden Campaign Simulation</h3><p>Actions and insights from a digital marketing simulation.</p><div class="meta">📈 Marketing Simulation | 📊 Analytics</div></div></div>
-          <div class="col-6"><div class="card"><h3>Café Oasis Go-To-Market</h3><p>Launch plan, positioning, and content strategy.</p><div class="meta">☕ Marketing | 🚀 Go-To-Market | 📊 Strategy</div></div></div>
+<div class="col-12"><h2>🧑‍💻 Data Science & Python Projects</h2></div>
+<div class="col-6"><div class="card"><h3>Bay Wheels Dock Saturation</h3><p>Predictive modeling to estimate bike dock saturation and optimize station management.</p><div class="meta">🐍 Python | 🤖 Modeling | ⚙️ Feature Engineering</div></div></div>
+<div class="col-6"><div class="card"><h3>Cluster Analysis</h3><p>Unsupervised clustering of consumer and engagement data to segment markets and identify actionable patterns.</p><div class="meta">📊 R | 🐍 Python | 🔍 Clustering | 📈 PCA</div></div></div>
+<div class="col-6"><div class="card"><h3>Facebook Live PCA and Clustering</h3><p>Unsupervised analysis with principal components and clusters to explain engagement drivers.</p><div class="meta">📊 R | 📈 PCA | 🔍 Clustering | 🤖 Logistic Regression</div></div></div>
+<div class="col-6"><div class="card"><h3>Nike Discriminant Analysis</h3><p>Discriminant analysis of usage groups with awareness attitude preference intention and loyalty measures.</p><div class="meta">📊 SPSS | 🎯 Discriminant Analysis</div></div></div>
+<div class="col-6"><div class="card"><h3>Grocery Getters Linear Modeling</h3><p>Revenue prediction with feature engineering model selection and evaluation for business decisions.</p><div class="meta">🐍 Python | 📈 Regression | 📊 Modeling</div></div></div>
+<div class="col-6"><div class="card"><h3>RH Unlimited Delivery Optimization</h3><p>Truck loading route planning and scheduling to improve on time delivery and cost control.</p><div class="meta">🐍 Python | 🚚 Optimization | ⚙️ Operations</div></div></div>
+<div class="col-6"><div class="card"><h3>Furniture Database Analysis</h3><p>Comprehensive analysis of furniture delivery and operations database identifying trends and optimizing logistics decisions.</p><div class="meta">🗄️ SQL | 📊 Database Analysis | ⚙️ Operations</div></div></div>
+<div class="col-6"><div class="card"><h3>Jungle Book Adventure Game</h3><p>Python-based interactive adventure game inspired by The Jungle Book showcasing object-oriented programming and game design skills.</p><div class="meta">🐍 Python | 🎮 Game Dev | 🏗️ OOP</div></div></div>
+<div class="col-6"><div class="card"><h3>Python Assessment Project</h3><p>Comprehensive Python assessment demonstrating data structures functions and problem-solving with a variety of coding challenges.</p><div class="meta">🐍 Python | 📚 Data Structures | 🔢 Problem Solving</div></div></div>
 
-        </div>
-        <p style="margin-top:10px;color:var(--muted);font-size:13px">
-          Tip: later, turn each project title into a link to its GitHub repo.
-        </p>
+<div class="col-12"><h2>📈 Visualization Dashboards</h2></div>
+<div class="col-6"><div class="card"><h3>Facebook Marketing Dashboard</h3><p>Interactive Power BI dashboard analyzing engagement reach and content performance.</p><div class="meta">📊 Power BI | 📈 Data Visualization</div></div></div>
+<div class="col-6"><div class="card"><h3>Reddit Dashboard Analysis</h3><p>Tableau and Power BI dashboards analyzing Reddit campaign discussions and user engagement metrics for insights.</p><div class="meta">📊 Tableau | 📊 Power BI | 📈 Visualization</div></div></div>
+<div class="col-6"><div class="card"><h3>Montgomery Boundary Box</h3><p>Geospatial analysis with Python and visualization in Tableau to model urban heat island effects and environmental patterns.</p><div class="meta">🐍 Python | 🌍 Geospatial | 📊 Tableau</div></div></div>
+<div class="col-6"><div class="card"><h3>Whaleport Sustainable Energy</h3><p>Big data analytics for renewable energy and SDG evaluation with practical recommendations.</p><div class="meta">🌱 Sustainability | 📊 Big Data | ⚡ Energy</div></div></div>
+<div class="col-6"><div class="card"><h3>Sales Forecasting Model</h3><p>Time series demand forecasting in Excel and Python to predict sales trends and inventory needs.</p><div class="meta">📊 Excel | 🐍 Python | ⏳ Time Series</div></div></div>
+
+<div class="col-12"><h2>📚 Simulations & Go-To-Market</h2></div>
+<div class="col-6"><div class="card"><h3>Darden Campaign Simulation</h3><p>Digital marketing simulation reflection with action recommendations and metric based insights.</p><div class="meta">📈 Marketing Simulation | 📊 Analytics</div></div></div>
+<div class="col-6"><div class="card"><h3>Café Oasis Go To Market</h3><p>Analytics driven plan for product launch positioning and content strategy for a cafe brand.</p><div class="meta">☕ Marketing | 🚀 Go-To-Market | 📊 Strategy</div></div></div>
+
       </div>
-    </section>
+      <p style="margin-top:10px;color:#9ca3af;font-size:13px">Replace each project link with your GitHub repo URL.</p>
+    </div>
+  </section>
 
-    <footer>© <span id="y"></span> Parth Ghosh • Built on GitHub Pages</footer>
-  </div>
-  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+  <footer>© <span id="y"></span> Parth Ghosh • Built with GitHub Pages</footer>
+</div>
+<script>document.getElementById('y').textContent=new Date().getFullYear();</script>
 </body>
 </html>
