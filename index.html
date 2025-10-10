@@ -10,28 +10,67 @@
       --bg:#0b0c10; --panel:#111218; --card:#151724; --text:#e8e8ea; --sub:#b6b7c1;
       --brand:#7c5cff; --ring:rgba(124,92,255,.35); --shadow:0 20px 40px rgba(0,0,0,.35);
       --switchBorder: rgba(124,92,255,.45); --switchText:#e8e8ea; --switchDot:#ffffff;
+      --toastBg: rgba(20,20,30,.9);
     }
     .light{
       --bg:#f7f8fc; --panel:#ffffff; --card:#ffffff; --text:#0f1222; --sub:#4b4e66;
       --brand:#5b4bff; --ring:rgba(91,75,255,.25); --shadow:0 18px 36px rgba(16,24,40,.08);
       --switchBorder: rgba(91,75,255,.55); --switchText:#0f1222; --switchDot:#dcdcff;
+      --toastBg: rgba(255,255,255,.98);
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;transition:background .4s ease}
+
+    /* Animated gradient background */
+    body{
+      margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);line-height:1.55;
+      background: linear-gradient(-45deg, #0b0c10, #111218, #151724, #0b0c10);
+      background-size: 400% 400%;
+      animation: bgShift 14s ease infinite;
+    }
+    @keyframes bgShift{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+
     a{color:inherit;text-decoration:none}
     .wrap{max-width:1100px;margin:0 auto;padding:28px 18px}
     .nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .name{font-weight:800;letter-spacing:.2px;font-size:22px}
-    .btn{display:inline-flex;align-items:center;gap:8px;background:var(--panel);border:1px solid rgba(124,92,255,.15);padding:10px 14px;border-radius:14px;box-shadow:var(--shadow);transition:.2s ease;font-weight:600}
+
+    /* Buttons + hover glow */
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;background:var(--panel);
+      border:1px solid rgba(124,92,255,.15);padding:10px 14px;border-radius:14px;
+      box-shadow:var(--shadow);transition:.2s ease;font-weight:600
+    }
     .btn.brand{background:linear-gradient(180deg,var(--brand),#5842ff);color:#fff;border-color:transparent}
     .btn.ghost{background:transparent;border-color:rgba(124,92,255,.25)}
+    .btn:hover{box-shadow:0 0 15px var(--brand), inset 0 0 8px var(--brand); transform: translateY(-2px)}
+
     .btnbar{display:flex;gap:10px;flex-wrap:wrap}
     .hero{margin-top:30px;display:grid;grid-template-columns:1.2fr .8fr;gap:26px}
     @media (max-width:860px){.hero{grid-template-columns:1fr}}
     .panel{background:var(--panel);border:1px solid rgba(124,92,255,.12);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
-    .bio h1{font-size:28px;margin:8px 0 6px}
+
+    .bio h1{font-size:28px;margin:8px 0 6px;min-height:1.6em}
     .bio p{color:var(--sub);margin:10px 0 0;font-size:15.5px}
-    .chip{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid rgba(124,92,255,.2);background:rgba(124,92,255,.08);margin:6px 8px 0 0;font-weight:600;font-size:13px}
+
+    /* Animated skill chips (staggered) */
+    .chip{
+      display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;
+      border:1px solid rgba(124,92,255,.2);background:rgba(124,92,255,.08);margin:6px 8px 0 0;
+      font-weight:600;font-size:13px; opacity:.9; animation: fadeChip 8s infinite
+    }
+    @keyframes fadeChip{0%,100%{opacity:.9}50%{opacity:1}}
+    .chip:nth-child(1){animation-delay:0s}
+    .chip:nth-child(2){animation-delay:.6s}
+    .chip:nth-child(3){animation-delay:1.2s}
+    .chip:nth-child(4){animation-delay:1.8s}
+    .chip:nth-child(5){animation-delay:2.4s}
+    .chip:nth-child(6){animation-delay:3s}
+
     .avatar{width:100%;border-radius:18px;height:100%;object-fit:cover;border:1px solid rgba(124,92,255,.18)}
 
     .section{margin-top:32px}
@@ -47,25 +86,33 @@
     @media (max-width:1024px){.grid{grid-template-columns:repeat(2,1fr)}}
     @media (max-width:640px){.grid{grid-template-columns:1fr}}
 
-    .card{background:var(--card);border:1px solid rgba(124,92,255,.12);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);transition:transform .25s ease,box-shadow .25s ease}
-    .card:hover{transform:translateY(-5px);box-shadow:0 18px 36px rgba(124,92,255,.35)}
+    /* Card + 3D tilt */
+    .card{
+      background:var(--card);border:1px solid rgba(124,92,255,.12);border-radius:18px;
+      overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);
+      transition:transform .25s ease,box-shadow .25s ease; transform-style:preserve-3d; perspective:800px
+    }
+    .card:hover{transform: translateY(-5px) rotateY(5deg) rotateX(3deg) scale(1.02);box-shadow:0 18px 36px rgba(124,92,255,.35)}
+
     /* PURE CSS THUMB (no images) */
     .thumb{width:100%;aspect-ratio:16/9;background:linear-gradient(120deg,#151224,#101a3a); position:relative; overflow:hidden}
     .thumb::after{content:''; position:absolute; inset:0; background:
       radial-gradient(600px 200px at -10% 0%, rgba(124,92,255,.25), transparent 60%),
       radial-gradient(400px 160px at 110% 40%, rgba(88,66,255,.2), transparent 55%);
       opacity:.9}
+
     .card-body{padding:14px 14px 16px}
     .title{font-weight:700;font-size:16.5px;margin:2px 0 4px}
     .desc{color:var(--sub);font-size:14px;margin:0 0 8px}
     .badges{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}
     .badge{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid rgba(124,92,255,.22);background:transparent}
     .badge.featured{background:linear-gradient(180deg,var(--brand),#5842ff);color:#fff;border-color:transparent}
+    .badge.popular{border-color:rgba(255,120,80,.5); color:#ffb39a}
     .links{display:flex;gap:8px;margin-top:auto}
 
-    .footer{margin:40px 0 10px;color:var(--sub);font-size:13px;text-align:center}
+    .footer{margin:28px 0 6px;color:var(--sub);font-size:13px;text-align:center}
 
-    /* VIBE SWITCH — clearer contrast in dark mode */
+    /* VIBE SWITCH — crisp contrast + pulse */
     .switch{
       position:relative;display:inline-flex;align-items:center;gap:10px;
       background:var(--panel);border:2px solid var(--switchBorder);
@@ -74,6 +121,7 @@
     .switch:focus-visible{outline:2px solid var(--brand); box-shadow:0 0 0 4px var(--ring)}
     .dot{height:20px;width:20px;background:var(--switchDot);border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.35)}
     .switch .label{font-weight:800;font-size:13px;color:var(--switchText);letter-spacing:.2px}
+    .switch:active .dot{ box-shadow: 0 0 20px 6px var(--brand); transition: box-shadow .4s ease }
 
     /* Background accent + party pulse */
     body::before{content:''; position:fixed; inset:0; background:
@@ -82,6 +130,28 @@
       pointer-events:none; transition:opacity .4s ease}
     @keyframes pulseGlow{0%{box-shadow:0 0 0 0 rgba(124,92,255,.35)}100%{box-shadow:0 0 0 24px rgba(124,92,255,0)}}
     .party .panel{animation:pulseGlow .9s ease 2}
+
+    /* Toast */
+    .toast{
+      position: fixed; left: 50%; transform: translateX(-50%);
+      bottom: 18px; z-index: 9999; background: var(--toastBg); color: var(--text);
+      border: 1px solid rgba(124,92,255,.25); border-radius: 14px; padding: 12px 14px;
+      font-size: 13.5px; display:flex; align-items:center; gap:10px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.35); backdrop-filter: blur(6px);
+      opacity: 0; pointer-events: none; transition: opacity .25s ease, transform .25s ease;
+    }
+    .toast.show{ opacity: 1; pointer-events: auto; transform: translate(-50%, -6px) }
+    .toast .close{cursor:pointer; border:0; background:transparent; color:var(--sub); font-size:16px; line-height:1}
+
+    /* Video Modal */
+    .modal{position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; align-items:center; justify-content:center; z-index:9998; padding:16px}
+    .modal.show{display:flex}
+    .modal-card{background:var(--panel); border:1px solid rgba(124,92,255,.25); border-radius:18px; max-width:900px; width:100%; box-shadow:0 18px 36px rgba(0,0,0,.5); overflow:hidden}
+    .modal-header{display:flex; align-items:center; justify-content:space-between; padding:10px 14px; border-bottom:1px solid rgba(124,92,255,.18)}
+    .modal-title{font-weight:800}
+    .modal-close{cursor:pointer; border:0; background:transparent; color:var(--sub); font-size:18px; padding:6px 8px}
+    .modal-body{background:#000}
+    .modal video{width:100%; height:auto; display:block}
   </style>
 </head>
 <body>
@@ -138,19 +208,43 @@
       <div class="grid" id="grid"></div>
     </section>
 
-    <div class="footer">Built by Parth Ghosh. Theme saved on your device.<br/>🎧 Currently vibing to: <span id="nowPlaying">Loading...</span></div>
+    <!-- Floating Quote -->
+    <div id="quote" style="text-align:center;margin-top:14px;color:var(--sub);font-style:italic;"></div>
+
+    <div class="footer">Built by Parth Ghosh. Theme saved on your device.<br/>
+      🎧 Currently vibing to: <span id="nowPlaying">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite">
+    <span>🎉 Confetti tip: press <b>V</b> on desktop, <b>double-tap</b> Vibe Switch, or <b>long-press</b> “Currently vibing to”.</span>
+    <button class="close" aria-label="Dismiss">✕</button>
+  </div>
+
+  <!-- Video Modal -->
+  <div id="playerModal" class="modal" aria-modal="true" role="dialog" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div id="modalTitle" class="modal-title">Playing video…</div>
+        <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <video id="player" playsinline controls muted></video>
+      </div>
+    </div>
   </div>
 
   <script>
     // ----- CONFIG -----
     const RESUME_PATH = 'resume.pdf';
-    const TOP_PICKS = [
+    const DEFAULT_TOP_PICKS = [
       'Expedia Global Expansion Strategy',
       'US Sales Dashboard Insights (2017)',
       'Air France Digital Marketing Analysis'
     ];
+    const POPULAR_THRESHOLD = 3; // show 🔥 Popular after this many clicks
 
-    // Projects (no images used)
     const projects = [
       { title:'Expedia Global Expansion Strategy', desc:'Stopover strategy for Iceland with forecast uplift and positioning.', tags:['Strategy','Forecasting','Travel'], links:{demo:'Expedia%20Stop%20Over%20Program.pdf'} },
       { title:'Shiva Tourist Dhaba Loyalty Analysis', desc:'SPSS discriminant analysis to segment loyalty and lift repeat visits.', tags:['SPSS','Segmentation','Marketing'], links:{demo:'shiva%20tourist%20dhaba%20.pdf'} },
@@ -160,7 +254,9 @@
       { title:'Airbnb Text and Data Analysis', desc:'R text mining + Tableau linking sentiment, amenities, price, and reviews.', tags:['R','Tableau','NLP'], links:{demo:'Airbnb%20Text%20and%20Data%20Analysis%20Report.pdf'} },
       { title:'User-Generated Content Dashboard', desc:'Power BI on Reddit topics with content and SEO recommendations.', tags:['Power BI','UGC','Marketing'], links:{demo:'User-generated%20content%20analysis%20power%20bi%20dashboard%20.pdf'} },
       { title:'US Sales Dashboard Insights (2017)', desc:'Promotion, pricing, and regional drivers to optimize revenue.', tags:['BI','Sales','Visualization'], links:{demo:'US%20Sales%20Dashboard%20Insights%202017.pdf'} },
-      { title:'Air France Digital Marketing Analysis', desc:'Ad spend optimization across publishers to improve ROAS and conversions.', tags:['Ads','ROAS','Analytics'], links:{demo:'Air%20France%20analysis.pdf'} }
+      { title:'Air France Digital Marketing Analysis', desc:'Ad spend optimization across publishers to improve ROAS and conversions.', tags:['Ads','ROAS','Analytics'], links:{demo:'Air%20France%20analysis.pdf'} },
+      // Video project (ensure exact filename in repo root)
+      { title:'Sales Strategy Video Assignment', desc:'Short walkthrough of sales strategy analysis and recommendations.', tags:['Strategy','Video','Presentation'], links:{video:'sales%20strategy%20video%20assignment.mp4'} }
     ];
 
     // ----- THEME + LINKS -----
@@ -174,6 +270,30 @@
     themeSwitch.addEventListener('click', ()=>{ root.classList.toggle('light'); localStorage.setItem('theme', root.classList.contains('light')?'light':'dark'); setVibeLabel(); });
     document.getElementById('resumeLink').href = RESUME_PATH;
     document.getElementById('contactBtn').addEventListener('click', ()=>{ location.href='mailto:parthghosh97@gmail.com?subject=Let%27s%20build%20something%20cool'; });
+
+    // ----- CLICK TRACKING (per-visitor) -----
+    function getClicks(){
+      try{ return JSON.parse(localStorage.getItem('projectClicks')||'{}'); }catch{return {}}
+    }
+    function setClicks(map){ localStorage.setItem('projectClicks', JSON.stringify(map)); }
+    function incrementClick(title){
+      const m = getClicks(); m[title] = (m[title]||0)+1; setClicks(m);
+    }
+
+    function topPicksByClicks(){
+      const clicks=getClicks();
+      const withCounts = projects.map(p=>({...p, _c: clicks[p.title]||0}));
+      // sort by clicks desc; break ties by default priority then title
+      const priority = new Map(DEFAULT_TOP_PICKS.map((t,i)=>[t,i]));
+      withCounts.sort((a,b)=>{
+        if(b._c!==a._c) return b._c-a._c;
+        const ap = priority.has(a.title)?priority.get(a.title):999;
+        const bp = priority.has(b.title)?priority.get(b.title):999;
+        if(ap!==bp) return ap-bp;
+        return a.title.localeCompare(b.title);
+      });
+      return withCounts.slice(0,3).map(x=>({title:x.title}));
+    }
 
     // ----- FILTERS + SEARCH -----
     const filterBar = document.getElementById('filterBar');
@@ -189,32 +309,56 @@
         const b=document.createElement('button');
         b.className='tag'+(tag===activeTag?' active':'');
         b.textContent=tag;
-        b.addEventListener('click',()=>{ activeTag=tag; renderGrid(); renderFilters(); });
+        b.addEventListener('click',()=>{ activeTag=tag; renderGrid(); renderTopPicks(); renderFilters(); });
         filterBar.appendChild(b);
       });
     }
 
     function matchSearch(p, q){ const text=(p.title+' '+p.desc+' '+p.tags.join(' ')).toLowerCase(); return text.includes(q.toLowerCase()); }
 
+    let currentTopPicksTitles = new Set();
+
     function makeCardHTML(p){
-      const feat = TOP_PICKS.includes(p.title);
+      const clicks = getClicks()[p.title]||0;
+      const isFeatured = currentTopPicksTitles.has(p.title);
+      const badges = [];
+      if(isFeatured) badges.push('<span class="badge featured">Top Pick</span>');
+      if(clicks >= POPULAR_THRESHOLD) badges.push('<span class="badge popular">🔥 Popular</span>');
+      p.tags.forEach(t=>badges.push(`<span class="badge">${t}</span>`));
+
+      // Choose action button: video or pdf
+      let actionBtn = '';
+      if (p.links.video){
+        actionBtn = `<button class="btn open-video" data-title="${p.title}" data-src="${p.links.video}">Play</button>`;
+      } else if (p.links.demo){
+        actionBtn = `<a class="btn open-link" data-title="${p.title}" href="${p.links.demo}" target="_blank" rel="noopener">Open</a>`;
+      }
+
       return `
         <div class="thumb" role="img" aria-label="${p.title} preview"></div>
         <div class="card-body">
           <div class="title">${p.title}</div>
           <p class="desc">${p.desc}</p>
-          <div class="badges">${feat?'<span class="badge featured">Top Pick</span>':''}${p.tags.map(t=>`<span class="badge">${t}</span>`).join('')}</div>
-          <div class="links">
-            ${p.links.demo ? `<a class="btn" href="${p.links.demo}" target="_blank" rel="noopener">Open</a>` : ''}
-          </div>
+          <div class="badges">${badges.join('')}</div>
+          <div class="links">${actionBtn}</div>
         </div>`;
+    }
+
+    function computeTopPicks(){
+      const dynamic = topPicksByClicks().map(o=>o.title);
+      const clicks = getClicks();
+      const allZero = Object.values(clicks).every(v=>v===0);
+      const titles = allZero ? DEFAULT_TOP_PICKS : dynamic;
+      currentTopPicksTitles = new Set(titles);
+      return projects.filter(p=>currentTopPicksTitles.has(p.title)).slice(0,3);
     }
 
     function renderTopPicks(){
       const featuredGrid=document.getElementById('featuredGrid');
-      const list=projects.filter(p=>TOP_PICKS.includes(p.title)).slice(0,3);
+      const list=computeTopPicks();
       featuredGrid.innerHTML='';
       list.forEach(p=>{ const c=document.createElement('article'); c.className='card'; c.innerHTML=makeCardHTML(p); featuredGrid.appendChild(c); });
+      wireActions(); // include buttons in featured area
     }
 
     function renderGrid(){
@@ -224,7 +368,7 @@
         const qOk = q === '' || matchSearch(p, q);
         return tagOk && qOk;
       });
-      const list = (activeTag==='All' && q==='') ? filtered.filter(p=>!TOP_PICKS.includes(p.title)) : filtered;
+      const list = (activeTag==='All' && q==='') ? filtered.filter(p=>!currentTopPicksTitles.has(p.title)) : filtered;
       grid.innerHTML='';
       if(list.length===0){
         const empty=document.createElement('div');
@@ -234,24 +378,29 @@
         return;
       }
       list.forEach(p=>{ const c=document.createElement('article'); c.className='card'; c.innerHTML=makeCardHTML(p); grid.appendChild(c); });
+      wireActions();
     }
 
-    searchBox.addEventListener('input', renderGrid);
+    searchBox.addEventListener('input', ()=>{ renderGrid(); });
 
-    // Rotating headline
-    const headlines = [
-      'Turning data into decisions 💡',
-      'Forecasting what\u2019s next 🔮',
-      'Simplifying chaos with dashboards 📊'
-    ];
-    let hi = 0;
-    setInterval(()=>{
-      hi = (hi+1)%headlines.length;
-      const h = document.getElementById('headline');
-      if(h){ h.textContent = headlines[hi]; }
-    }, 3500);
+    // ----- Typing headline -----
+    (function(){
+      const lines = ["Turning data into decisions 💡","Forecasting what’s next 🔮","Simplifying chaos with dashboards 📊"];
+      let i=0, j=0, isDeleting=false;
+      const el = document.getElementById('headline');
+      function type(){
+        const current = lines[i];
+        el.textContent = current.slice(0, j);
+        if(!isDeleting && j < current.length){ j++; }
+        else if(isDeleting && j > 0){ j--; }
+        else if(!isDeleting && j === current.length){ isDeleting = true; return setTimeout(type, 1200); }
+        else if(isDeleting && j === 0){ isDeleting = false; i = (i+1)%lines.length; }
+        setTimeout(type, isDeleting ? 60 : 100);
+      }
+      type();
+    })();
 
-    // Easter egg: press V for confetti
+    // ----- Confetti (desktop + mobile) -----
     function partyPulse(){
       document.body.classList.add('party');
       for(let i=0;i<24;i++){
@@ -265,44 +414,120 @@
       }
       setTimeout(()=>document.body.classList.remove('party'), 1200);
     }
+    // Desktop: key "v"
     document.addEventListener('keydown', (ev)=>{ if(ev.key.toLowerCase()==='v'){ partyPulse(); }} );
+    // Mobile: double-tap Vibe Switch
+    let lastTap = 0;
+    themeSwitch.addEventListener('touchend', () => {
+      const now = Date.now();
+      if (now - lastTap < 350) partyPulse();
+      lastTap = now;
+    }, { passive: true });
+    // Mobile: long-press Now Playing
+    const npEl = document.getElementById('nowPlaying');
+    let pressTimer;
+    if (npEl) {
+      npEl.addEventListener('touchstart', () => { pressTimer = setTimeout(partyPulse, 600); }, { passive: true });
+      npEl.addEventListener('touchend', () => clearTimeout(pressTimer));
+      npEl.addEventListener('touchmove', () => clearTimeout(pressTimer));
+    }
 
-    // Footer "Now Playing" rotator
+    // ----- Footer "Now Playing" rotator -----
     (function(){
       const moods=['90210 – Travis Scott','Nights – Frank Ocean','The Plan – Travis Scott','Love – Kendrick Lamar','Self Care – Mac Miller'];
       const np=document.getElementById('nowPlaying');
       let i=0; if(np){ np.textContent=moods[0]; setInterval(()=>{ i=(i+1)%moods.length; np.textContent=moods[i]; }, 6000); }
     })();
 
-    // Wire links + render
+    // ----- Floating Quote rotator -----
+    (function(){
+      const quotes = [
+        "Data is the new oil — but refined by insight.",
+        "Analytics turns hindsight into foresight.",
+        "Small data. Big impact.",
+        "From patterns to purpose."
+      ];
+      const q = document.getElementById('quote');
+      let qi = 0; if(q){ q.textContent = quotes[0]; setInterval(()=>{ qi=(qi+1)%quotes.length; q.textContent = quotes[qi]; }, 6000); }
+    })();
+
+    // ----- Toast hint (dismissible) -----
+    const toast = document.getElementById('toast');
+    const closeToast = toast.querySelector('.close');
+    function showToast(){
+      const last = parseInt(localStorage.getItem('toastTime')||'0',10);
+      const now = Date.now();
+      if (now - last < 24*60*60*1000) return;
+      toast.classList.add('show');
+      localStorage.setItem('toastTime', String(now));
+      setTimeout(()=>toast.classList.remove('show'), 7000);
+    }
+    closeToast.addEventListener('click', ()=> toast.classList.remove('show'));
+    setTimeout(showToast, 800);
+
+    // ----- Video modal logic -----
+    const modal = document.getElementById('playerModal');
+    const player = document.getElementById('player');
+    const modalClose = document.getElementById('modalClose');
+
+    function openVideo(src, title){
+      document.getElementById('modalTitle').textContent = title;
+      player.src = src;
+      modal.classList.add('show');
+      player.play().catch(()=>{}); // starts muted for autoplay policy
+    }
+    function closeVideo(){
+      player.pause();
+      player.removeAttribute('src'); // unload
+      player.load();
+      modal.classList.remove('show');
+    }
+    modalClose.addEventListener('click', closeVideo);
+    modal.addEventListener('click', (e)=>{ if(e.target===modal) closeVideo(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && modal.classList.contains('show')) closeVideo(); });
+
+    // Wire click handlers (PDF + Video)
+    function wireActions(){
+      // PDFs
+      document.querySelectorAll('.open-link').forEach(a=>{
+        a.addEventListener('click', (e)=>{
+          const title = e.currentTarget.getAttribute('data-title');
+          incrementClick(title);
+          renderTopPicks(); renderGrid();
+        }, { passive: true });
+      });
+      // Videos
+      document.querySelectorAll('.open-video').forEach(btn=>{
+        btn.addEventListener('click', (e)=>{
+          const t = e.currentTarget.getAttribute('data-title');
+          const src = e.currentTarget.getAttribute('data-src');
+          incrementClick(t);
+          openVideo(src, t);
+          renderTopPicks(); renderGrid();
+        });
+      });
+    }
+
+    // ----- Initial render -----
     document.getElementById('avatar').src = 'Headshot cropped.jpg';
     document.getElementById('resumeLink').href = RESUME_PATH;
     document.getElementById('contactBtn').addEventListener('click', ()=>{ location.href='mailto:parthghosh97@gmail.com?subject=Let%27s%20build%20something%20cool'; });
+
+    function renderTopPicks(){ /* redefined after computeTopPicks */ }
+    // redefine with closure populated
+    (function(){
+      const _renderTopPicks = function(){
+        const featuredGrid=document.getElementById('featuredGrid');
+        const list=computeTopPicks();
+        featuredGrid.innerHTML='';
+        list.forEach(p=>{ const c=document.createElement('article'); c.className='card'; c.innerHTML=makeCardHTML(p); featuredGrid.appendChild(c); });
+        wireActions();
+      };
+      window.renderTopPicks = _renderTopPicks;
+    })();
 
     function init(){ renderFilters(); renderTopPicks(); renderGrid(); }
     init();
   </script>
 </body>
 </html>
-<script>
-// ...your existing code above (including partyPulse and keydown listener)
-
-// Mobile: double-tap Vibe Switch to trigger confetti
-let lastTap = 0;
-themeSwitch.addEventListener('touchend', () => {
-  const now = Date.now();
-  if (now - lastTap < 350) partyPulse();
-  lastTap = now;
-}, { passive: true });
-
-// Mobile: long-press the "Currently vibing to" text to trigger confetti
-const npEl = document.getElementById('nowPlaying');
-let pressTimer;
-if (npEl) {
-  npEl.addEventListener('touchstart', () => {
-    pressTimer = setTimeout(partyPulse, 600); // hold ~0.6s
-  }, { passive: true });
-  npEl.addEventListener('touchend', () => clearTimeout(pressTimer));
-  npEl.addEventListener('touchmove', () => clearTimeout(pressTimer)); // cancel if finger moves
-}
-</script>
