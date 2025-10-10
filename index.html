@@ -6,8 +6,16 @@
   <title>Parth Ghosh • Portfolio</title>
   <meta name="description" content="Parth Ghosh — Business Analytics portfolio. Predictive modeling, dashboards, marketing analytics." />
   <style>
-    :root{--bg:#0b0c10;--panel:#111218;--card:#151724;--text:#e8e8ea;--sub:#b6b7c1;--brand:#7c5cff;--ring:rgba(124,92,255,.35);--shadow:0 20px 40px rgba(0,0,0,.35)}
-    .light{--bg:#f7f8fc;--panel:#ffffff;--card:#ffffff;--text:#0f1222;--sub:#4b4e66;--brand:#5b4bff;--ring:rgba(91,75,255,.25);--shadow:0 18px 36px rgba(16,24,40,.08)}
+    :root{
+      --bg:#0b0c10; --panel:#111218; --card:#151724; --text:#e8e8ea; --sub:#b6b7c1;
+      --brand:#7c5cff; --ring:rgba(124,92,255,.35); --shadow:0 20px 40px rgba(0,0,0,.35);
+      --switchBorder: rgba(124,92,255,.45); --switchText:#e8e8ea; --switchDot:#ffffff;
+    }
+    .light{
+      --bg:#f7f8fc; --panel:#ffffff; --card:#ffffff; --text:#0f1222; --sub:#4b4e66;
+      --brand:#5b4bff; --ring:rgba(91,75,255,.25); --shadow:0 18px 36px rgba(16,24,40,.08);
+      --switchBorder: rgba(91,75,255,.55); --switchText:#0f1222; --switchDot:#dcdcff;
+    }
     *{box-sizing:border-box}
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;transition:background .4s ease}
     a{color:inherit;text-decoration:none}
@@ -41,7 +49,12 @@
 
     .card{background:var(--card);border:1px solid rgba(124,92,255,.12);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);transition:transform .25s ease,box-shadow .25s ease}
     .card:hover{transform:translateY(-5px);box-shadow:0 18px 36px rgba(124,92,255,.35)}
-    .thumb{width:100%;aspect-ratio:16/9;background:linear-gradient(120deg,#151224,#101a3a)}
+    /* PURE CSS THUMB (no images) */
+    .thumb{width:100%;aspect-ratio:16/9;background:linear-gradient(120deg,#151224,#101a3a); position:relative; overflow:hidden}
+    .thumb::after{content:''; position:absolute; inset:0; background:
+      radial-gradient(600px 200px at -10% 0%, rgba(124,92,255,.25), transparent 60%),
+      radial-gradient(400px 160px at 110% 40%, rgba(88,66,255,.2), transparent 55%);
+      opacity:.9}
     .card-body{padding:14px 14px 16px}
     .title{font-weight:700;font-size:16.5px;margin:2px 0 4px}
     .desc{color:var(--sub);font-size:14px;margin:0 0 8px}
@@ -51,11 +64,18 @@
     .links{display:flex;gap:8px;margin-top:auto}
 
     .footer{margin:40px 0 10px;color:var(--sub);font-size:13px;text-align:center}
-    .switch{position:relative;display:inline-flex;align-items:center;gap:8px;background:var(--panel);border:1px solid rgba(124,92,255,.25);border-radius:999px;cursor:pointer;padding:6px 12px}
-    .dot{height:18px;width:18px;background:linear-gradient(180deg,#fff,#d8d8ff);border-radius:50%}
-    .switch .label{font-weight:700;font-size:13px;opacity:.9}
 
-    /* Background accent and party pulse */
+    /* VIBE SWITCH — clearer contrast in dark mode */
+    .switch{
+      position:relative;display:inline-flex;align-items:center;gap:10px;
+      background:var(--panel);border:2px solid var(--switchBorder);
+      border-radius:999px;cursor:pointer;padding:8px 14px; box-shadow:0 0 0 2px rgba(0,0,0,.25)
+    }
+    .switch:focus-visible{outline:2px solid var(--brand); box-shadow:0 0 0 4px var(--ring)}
+    .dot{height:20px;width:20px;background:var(--switchDot);border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+    .switch .label{font-weight:800;font-size:13px;color:var(--switchText);letter-spacing:.2px}
+
+    /* Background accent + party pulse */
     body::before{content:''; position:fixed; inset:0; background:
       radial-gradient(circle at 20% 20%, rgba(124,92,255,.12), transparent 60%),
       radial-gradient(circle at 80% 30%, rgba(88,66,255,.10), transparent 55%);
@@ -94,7 +114,6 @@
         </div>
       </div>
       <div class="panel">
-        <!-- Use your real headshot from repo root -->
         <img class="avatar" id="avatar" src="Headshot cropped.jpg" alt="Parth Ghosh portrait"/>
       </div>
     </section>
@@ -123,28 +142,25 @@
   </div>
 
   <script>
-    // ----- CONFIG (filenames must match your repo root) -----
-    const RESUME_PATH = 'resume.pdf'; // keep your existing resume filename
+    // ----- CONFIG -----
+    const RESUME_PATH = 'resume.pdf';
     const TOP_PICKS = [
       'Expedia Global Expansion Strategy',
       'US Sales Dashboard Insights (2017)',
       'Air France Digital Marketing Analysis'
     ];
 
-    // Simple inline thumbnail (no assets needed)
-    const THUMB_DURI = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900"><defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="%23151224"/><stop offset="100%" stop-color="%23101a3a"/></linearGradient></defs><rect width="100%" height="100%" fill="url(%23g)"/><circle cx="130" cy="140" r="60" fill="%237c5cff" opacity="0.6"/><rect x="240" y="110" width="980" height="60" rx="10" fill="white" opacity="0.18"/><rect x="240" y="200" width="820" height="40" rx="8" fill="white" opacity="0.12"/></svg>';
-
-    // ONLY the projects you uploaded here:
+    // Projects (no images used)
     const projects = [
-      { title:'Expedia Global Expansion Strategy', desc:'Stopover strategy for Iceland with forecast uplift and positioning.', tags:['Strategy','Forecasting','Travel'], thumb:THUMB_DURI, links:{demo:'Expedia%20Stop%20Over%20Program.pdf'} },
-      { title:'Shiva Tourist Dhaba Loyalty Analysis', desc:'SPSS discriminant analysis to segment loyalty and lift repeat visits.', tags:['SPSS','Segmentation','Marketing'], thumb:THUMB_DURI, links:{demo:'shiva%20tourist%20dhaba%20.pdf'} },
-      { title:'Pillsbury Cookie Challenge', desc:'Consumer insights and perceptual maps to rebuild emotional connection.', tags:['Marketing','Insights','Positioning'], thumb:THUMB_DURI, links:{demo:'pillsbury%20cookie%20challenge%20.pdf'} },
-      { title:'Urban Heat Island Prediction (Business Challenge III)', desc:'Random Forest on satellite indices to predict heat hotspots and guide policy.', tags:['Python','ML','Sustainability'], thumb:THUMB_DURI, links:{demo:'business%20challenge%203%20.pdf'} },
-      { title:'Dataiku Car Image Classification', desc:'CNN detection classifies SUVs vs sedans to inform production planning.', tags:['Dataiku','Computer Vision','CNN'], thumb:THUMB_DURI, links:{demo:'Dataiku%20Machine%20Learning%20Sample%20for%20Car%20Images%20Classification%20to%20produce%20automobiles%20.pdf'} },
-      { title:'Airbnb Text and Data Analysis', desc:'R text mining + Tableau linking sentiment, amenities, price, and reviews.', tags:['R','Tableau','NLP'], thumb:THUMB_DURI, links:{demo:'Airbnb%20Text%20and%20Data%20Analysis%20Report.pdf'} },
-      { title:'User-Generated Content Dashboard', desc:'Power BI on Reddit topics with content and SEO recommendations.', tags:['Power BI','UGC','Marketing'], thumb:THUMB_DURI, links:{demo:'User-generated%20content%20analysis%20power%20bi%20dashboard%20.pdf'} },
-      { title:'US Sales Dashboard Insights (2017)', desc:'Promotion, pricing, and regional drivers to optimize revenue.', tags:['BI','Sales','Visualization'], thumb:THUMB_DURI, links:{demo:'US%20Sales%20Dashboard%20Insights%202017.pdf'} },
-      { title:'Air France Digital Marketing Analysis', desc:'Ad spend optimization across publishers to improve ROAS and conversions.', tags:['Ads','ROAS','Analytics'], thumb:THUMB_DURI, links:{demo:'Air%20France%20analysis.pdf'} }
+      { title:'Expedia Global Expansion Strategy', desc:'Stopover strategy for Iceland with forecast uplift and positioning.', tags:['Strategy','Forecasting','Travel'], links:{demo:'Expedia%20Stop%20Over%20Program.pdf'} },
+      { title:'Shiva Tourist Dhaba Loyalty Analysis', desc:'SPSS discriminant analysis to segment loyalty and lift repeat visits.', tags:['SPSS','Segmentation','Marketing'], links:{demo:'shiva%20tourist%20dhaba%20.pdf'} },
+      { title:'Pillsbury Cookie Challenge', desc:'Consumer insights and perceptual maps to rebuild emotional connection.', tags:['Marketing','Insights','Positioning'], links:{demo:'pillsbury%20cookie%20challenge%20.pdf'} },
+      { title:'Urban Heat Island Prediction (Business Challenge III)', desc:'Random Forest on satellite indices to predict heat hotspots and guide policy.', tags:['Python','ML','Sustainability'], links:{demo:'business%20challenge%203%20.pdf'} },
+      { title:'Dataiku Car Image Classification', desc:'CNN detection classifies SUVs vs sedans to inform production planning.', tags:['Dataiku','Computer Vision','CNN'], links:{demo:'Dataiku%20Machine%20Learning%20Sample%20for%20Car%20Images%20Classification%20to%20produce%20automobiles%20.pdf'} },
+      { title:'Airbnb Text and Data Analysis', desc:'R text mining + Tableau linking sentiment, amenities, price, and reviews.', tags:['R','Tableau','NLP'], links:{demo:'Airbnb%20Text%20and%20Data%20Analysis%20Report.pdf'} },
+      { title:'User-Generated Content Dashboard', desc:'Power BI on Reddit topics with content and SEO recommendations.', tags:['Power BI','UGC','Marketing'], links:{demo:'User-generated%20content%20analysis%20power%20bi%20dashboard%20.pdf'} },
+      { title:'US Sales Dashboard Insights (2017)', desc:'Promotion, pricing, and regional drivers to optimize revenue.', tags:['BI','Sales','Visualization'], links:{demo:'US%20Sales%20Dashboard%20Insights%202017.pdf'} },
+      { title:'Air France Digital Marketing Analysis', desc:'Ad spend optimization across publishers to improve ROAS and conversions.', tags:['Ads','ROAS','Analytics'], links:{demo:'Air%20France%20analysis.pdf'} }
     ];
 
     // ----- THEME + LINKS -----
@@ -156,7 +172,6 @@
     function setVibeLabel(){ themeLabel.textContent = root.classList.contains('light') ? '🌙 Dark Vibe' : '☀️ Light Vibe'; }
     setVibeLabel();
     themeSwitch.addEventListener('click', ()=>{ root.classList.toggle('light'); localStorage.setItem('theme', root.classList.contains('light')?'light':'dark'); setVibeLabel(); });
-
     document.getElementById('resumeLink').href = RESUME_PATH;
     document.getElementById('contactBtn').addEventListener('click', ()=>{ location.href='mailto:parthghosh97@gmail.com?subject=Let%27s%20build%20something%20cool'; });
 
@@ -184,7 +199,7 @@
     function makeCardHTML(p){
       const feat = TOP_PICKS.includes(p.title);
       return `
-        <img class="thumb" src="${p.thumb}" alt="${p.title} preview"/>
+        <div class="thumb" role="img" aria-label="${p.title} preview"></div>
         <div class="card-body">
           <div class="title">${p.title}</div>
           <p class="desc">${p.desc}</p>
@@ -209,7 +224,6 @@
         const qOk = q === '' || matchSearch(p, q);
         return tagOk && qOk;
       });
-      // avoid duplicates when unfiltered by excluding Top Picks from main grid
       const list = (activeTag==='All' && q==='') ? filtered.filter(p=>!TOP_PICKS.includes(p.title)) : filtered;
       grid.innerHTML='';
       if(list.length===0){
@@ -224,7 +238,7 @@
 
     searchBox.addEventListener('input', renderGrid);
 
-    // ----- Rotating headline -----
+    // Rotating headline
     const headlines = [
       'Turning data into decisions 💡',
       'Forecasting what\u2019s next 🔮',
@@ -237,7 +251,7 @@
       if(h){ h.textContent = headlines[hi]; }
     }, 3500);
 
-    // ----- Easter egg: press V for confetti -----
+    // Easter egg: press V for confetti
     function partyPulse(){
       document.body.classList.add('party');
       for(let i=0;i<24;i++){
@@ -253,23 +267,19 @@
     }
     document.addEventListener('keydown', (ev)=>{ if(ev.key.toLowerCase()==='v'){ partyPulse(); }} );
 
-    // ----- Footer "Now Playing" rotator -----
+    // Footer "Now Playing" rotator
     (function(){
       const moods=['90210 – Travis Scott','Nights – Frank Ocean','The Plan – Travis Scott','Love – Kendrick Lamar','Self Care – Mac Miller'];
       const np=document.getElementById('nowPlaying');
       let i=0; if(np){ np.textContent=moods[0]; setInterval(()=>{ i=(i+1)%moods.length; np.textContent=moods[i]; }, 6000); }
     })();
 
-    // ----- Wire links, render UI -----
+    // Wire links + render
     document.getElementById('avatar').src = 'Headshot cropped.jpg';
     document.getElementById('resumeLink').href = RESUME_PATH;
     document.getElementById('contactBtn').addEventListener('click', ()=>{ location.href='mailto:parthghosh97@gmail.com?subject=Let%27s%20build%20something%20cool'; });
 
-    function init(){
-      renderFilters();
-      renderTopPicks();
-      renderGrid();
-    }
+    function init(){ renderFilters(); renderTopPicks(); renderGrid(); }
     init();
   </script>
 </body>
