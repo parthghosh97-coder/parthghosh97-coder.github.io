@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Parth Ghosh • Portfolio</title>
   <meta name="description" content="Parth Ghosh — Business Analytics portfolio. Predictive modeling, dashboards, marketing analytics." />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Parth Ghosh • Business Analytics Portfolio">
+  <meta property="og:description" content="Predictive modeling, dashboards, and marketing analytics. Clear, outcome-focused work in Python, SQL, Power BI, and Tableau.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://parthghosh97-coder.github.io/">
+  <meta name="twitter:card" content="summary">
+
   <style>
     :root{
       --bg:#0b0c10; --panel:#111218; --card:#151724; --text:#e8e8ea; --sub:#b6b7c1;
@@ -19,6 +27,11 @@
       --toastBg: rgba(255,255,255,.98);
     }
     *{box-sizing:border-box}
+
+    /* Respect users who prefer less motion */
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+    }
 
     /* Animated gradient background */
     body{
@@ -48,6 +61,7 @@
     .btn.brand{background:linear-gradient(180deg,var(--brand),#5842ff);color:#fff;border-color:transparent}
     .btn.ghost{background:transparent;border-color:rgba(124,92,255,.25)}
     .btn:hover{box-shadow:0 0 15px var(--brand), inset 0 0 8px var(--brand); transform: translateY(-2px)}
+    .btn:focus-visible{outline:2px solid var(--brand); box-shadow:0 0 0 4px var(--ring)}
 
     .btnbar{display:flex;gap:10px;flex-wrap:wrap}
     .hero{margin-top:30px;display:grid;grid-template-columns:1.2fr .8fr;gap:26px}
@@ -56,6 +70,7 @@
 
     .bio h1{font-size:28px;margin:8px 0 6px;min-height:1.6em}
     .bio p{color:var(--sub);margin:10px 0 0;font-size:15.5px}
+    .opento{margin-top:10px;font-size:13.5px;color:var(--sub)}
 
     /* Animated skill chips (staggered) */
     .chip{
@@ -79,6 +94,7 @@
     .filterbar{display:flex;gap:8px;flex-wrap:wrap}
     .tag{border:1px solid rgba(124,92,255,.22);background:var(--card);padding:8px 12px;border-radius:12px;cursor:pointer;font-weight:600;font-size:13px}
     .tag.active{outline:2px solid var(--ring);box-shadow:0 0 0 3px var(--ring)}
+    .tag:focus-visible{outline:2px solid var(--brand); box-shadow:0 0 0 4px var(--ring)}
     .search{display:flex;gap:8px;align-items:center}
     .input{flex:1;min-width:220px;background:var(--panel);border:1px solid rgba(124,92,255,.2);border-radius:14px;padding:10px 12px;color:var(--text)}
 
@@ -142,16 +158,6 @@
     }
     .toast.show{ opacity: 1; pointer-events: auto; transform: translate(-50%, -6px) }
     .toast .close{cursor:pointer; border:0; background:transparent; color:var(--sub); font-size:16px; line-height:1}
-
-    /* Video Modal */
-    .modal{position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; align-items:center; justify-content:center; z-index:9998; padding:16px}
-    .modal.show{display:flex}
-    .modal-card{background:var(--panel); border:1px solid rgba(124,92,255,.25); border-radius:18px; max-width:900px; width:100%; box-shadow:0 18px 36px rgba(0,0,0,.5); overflow:hidden}
-    .modal-header{display:flex; align-items:center; justify-content:space-between; padding:10px 14px; border-bottom:1px solid rgba(124,92,255,.18)}
-    .modal-title{font-weight:800}
-    .modal-close{cursor:pointer; border:0; background:transparent; color:var(--sub); font-size:18px; padding:6px 8px}
-    .modal-body{background:#000}
-    .modal video{width:100%; height:auto; display:block}
   </style>
 </head>
 <body>
@@ -160,10 +166,10 @@
       <div class="name">Parth Ghosh</div>
       <div class="btnbar">
         <a class="btn ghost" href="#projects">Projects</a>
-        <a class="btn ghost" id="resumeLink" href="#" target="_blank" rel="noopener">Resume</a>
+        <a class="btn brand" id="resumeLink" href="#" target="_blank" rel="noopener">Resume</a>
         <a class="btn ghost" id="githubLink" href="https://github.com/parthghosh97-coder" target="_blank" rel="noopener">GitHub</a>
         <a class="btn ghost" id="linkedinLink" href="https://www.linkedin.com/in/parth-ghosh-736669226" target="_blank" rel="noopener">LinkedIn</a>
-        <button class="btn brand" id="contactBtn">Contact</button>
+        <button class="btn ghost" id="contactBtn">Contact</button>
         <button class="switch" id="themeSwitch" aria-label="Toggle theme">
           <span class="dot"></span><span class="label" id="themeLabel">Vibe Switch</span>
         </button>
@@ -172,8 +178,9 @@
 
     <section class="hero">
       <div class="panel bio">
-        <h1 id="headline">Business Analytics and Data Insights</h1>
-        <p>I am Parth Ghosh, a Business Analytics professional driven by curiosity and impact. I specialize in transforming raw data into strategic insights through predictive modeling, visualization, and storytelling. My experience spans marketing analytics, forecasting, and sustainability projects using Python, Power BI, and Tableau.</p>
+        <h1 id="headline">Business Analytics that ships decisions.</h1>
+        <p>I’m Parth Ghosh, a Business Analytics professional focused on turning raw data into clear, revenue-linked actions through predictive modeling, visualization, and storytelling. Experience across marketing analytics, forecasting, and sustainability using Python, SQL, Power BI, and Tableau.</p>
+        <div class="opento">Open to: Data Analyst · Marketing Analytics · BI — US remote/hybrid</div>
         <div>
           <span class="chip">Python</span>
           <span class="chip">SQL</span>
@@ -222,19 +229,6 @@
     <button class="close" aria-label="Dismiss">✕</button>
   </div>
 
-  <!-- Video Modal -->
-  <div id="playerModal" class="modal" aria-modal="true" role="dialog" aria-labelledby="modalTitle">
-    <div class="modal-card">
-      <div class="modal-header">
-        <div id="modalTitle" class="modal-title">Playing video…</div>
-        <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
-      </div>
-      <div class="modal-body">
-        <video id="player" playsinline controls muted></video>
-      </div>
-    </div>
-  </div>
-
   <script>
     // ----- CONFIG -----
     const RESUME_PATH = 'resume.pdf';
@@ -246,16 +240,15 @@
     const POPULAR_THRESHOLD = 3; // show 🔥 Popular after this many clicks
 
     const projects = [
-      { title:'Expedia Global Expansion Strategy', desc:'Stopover strategy for Iceland with forecast uplift and positioning.', tags:['Strategy','Forecasting','Travel'], links:{demo:'Expedia%20Stop%20Over%20Program.pdf'} },
-      { title:'Shiva Tourist Dhaba Loyalty Analysis', desc:'SPSS discriminant analysis to segment loyalty and lift repeat visits.', tags:['SPSS','Segmentation','Marketing'], links:{demo:'shiva%20tourist%20dhaba%20.pdf'} },
-      { title:'Pillsbury Cookie Challenge', desc:'Consumer insights and perceptual maps to rebuild emotional connection.', tags:['Marketing','Insights','Positioning'], links:{demo:'pillsbury%20cookie%20challenge%20.pdf'} },
-      { title:'Urban Heat Island Prediction (Business Challenge III)', desc:'Random Forest on satellite indices to predict heat hotspots and guide policy.', tags:['Python','ML','Sustainability'], links:{demo:'business%20challenge%203%20.pdf'} },
-      { title:'Dataiku Car Image Classification', desc:'CNN detection classifies SUVs vs sedans to inform production planning.', tags:['Dataiku','Computer Vision','CNN'], links:{demo:'Dataiku%20Machine%20Learning%20Sample%20for%20Car%20Images%20Classification%20to%20produce%20automobiles%20.pdf'} },
+      { title:'Expedia Global Expansion Strategy', desc:'Stopover strategy for Iceland; forecast scenarioing and positioning recommendations.', tags:['Strategy','Forecasting','Travel'], links:{demo:'Expedia%20Stop%20Over%20Program.pdf'} },
+      { title:'Shiva Tourist Dhaba Loyalty Analysis', desc:'Loyalty segmentation via discriminant analysis; repeat-visit uplift plan.', tags:['SPSS','Segmentation','Marketing'], links:{demo:'shiva%20tourist%20dhaba%20.pdf'} },
+      { title:'Pillsbury Cookie Challenge', desc:'Consumer insight + perceptual maps; rebuild emotional connection strategy.', tags:['Marketing','Insights','Positioning'], links:{demo:'pillsbury%20cookie%20challenge%20.pdf'} },
+      { title:'Urban Heat Island Prediction (Business Challenge III)', desc:'Satellite indices + Random Forest to guide heat mitigation priorities.', tags:['Python','ML','Sustainability'], links:{demo:'business%20challenge%203%20.pdf'} },
+      { title:'Dataiku Car Image Classification', desc:'CNN pipeline classifies body types to inform production planning.', tags:['Dataiku','Computer Vision','CNN'], links:{demo:'Dataiku%20Machine%20Learning%20Sample%20for%20Car%20Images%20Classification%20to%20produce%20automobiles%20.pdf'} },
       { title:'Airbnb Text and Data Analysis', desc:'R text mining + Tableau linking sentiment, amenities, price, and reviews.', tags:['R','Tableau','NLP'], links:{demo:'Airbnb%20Text%20and%20Data%20Analysis%20Report.pdf'} },
-      { title:'User-Generated Content Dashboard', desc:'Power BI on Reddit topics with content and SEO recommendations.', tags:['Power BI','UGC','Marketing'], links:{demo:'User-generated%20content%20analysis%20power%20bi%20dashboard%20.pdf'} },
-      { title:'US Sales Dashboard Insights (2017)', desc:'Promotion, pricing, and regional drivers to optimize revenue.', tags:['BI','Sales','Visualization'], links:{demo:'US%20Sales%20Dashboard%20Insights%202017.pdf'} },
-      { title:'Air France Digital Marketing Analysis', desc:'Ad spend optimization across publishers to improve ROAS and conversions.', tags:['Ads','ROAS','Analytics'], links:{demo:'Air%20France%20analysis.pdf'} },
-    
+      { title:'User-Generated Content Dashboard', desc:'Power BI on Reddit topics; content themes and SEO recommendations.', tags:['Power BI','UGC','Marketing'], links:{demo:'User-generated%20content%20analysis%20power%20bi%20dashboard%20.pdf'} },
+      { title:'US Sales Dashboard Insights (2017)', desc:'Driver analysis of promotion, pricing, and regions to optimize revenue.', tags:['BI','Sales','Visualization'], links:{demo:'US%20Sales%20Dashboard%20Insights%202017.pdf'} },
+      { title:'Air France Digital Marketing Analysis', desc:'Budget mix recommendations to improve ROAS and conversions.', tags:['Ads','ROAS','Analytics'], links:{demo:'Air%20France%20analysis.pdf'} }
     ];
 
     // ----- THEME + LINKS -----
@@ -309,6 +302,7 @@
         b.className='tag'+(tag===activeTag?' active':'');
         b.textContent=tag;
         b.addEventListener('click',()=>{ activeTag=tag; renderGrid(); renderTopPicks(); renderFilters(); });
+        b.addEventListener('keydown',(e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); b.click(); }});
         filterBar.appendChild(b);
       });
     }
@@ -325,21 +319,15 @@
       if(clicks >= POPULAR_THRESHOLD) badges.push('<span class="badge popular">🔥 Popular</span>');
       p.tags.forEach(t=>badges.push(`<span class="badge">${t}</span>`));
 
-      // Choose action button: video or pdf
-      let actionBtn = '';
-      if (p.links.video){
-        actionBtn = `<button class="btn open-video" data-title="${p.title}" data-src="${p.links.video}">Play</button>`;
-      } else if (p.links.demo){
-        actionBtn = `<a class="btn open-link" data-title="${p.title}" href="${p.links.demo}" target="_blank" rel="noopener">Open</a>`;
-      }
-
       return `
         <div class="thumb" role="img" aria-label="${p.title} preview"></div>
         <div class="card-body">
           <div class="title">${p.title}</div>
           <p class="desc">${p.desc}</p>
           <div class="badges">${badges.join('')}</div>
-          <div class="links">${actionBtn}</div>
+          <div class="links">
+            ${p.links.demo ? `<a class="btn open-link" data-title="${p.title}" href="${p.links.demo}" target="_blank" rel="noopener">Open</a>` : ''}
+          </div>
         </div>`;
     }
 
@@ -384,7 +372,7 @@
 
     // ----- Typing headline -----
     (function(){
-      const lines = ["Turning data into decisions 💡","Forecasting what’s next 🔮","Simplifying chaos with dashboards 📊"];
+      const lines = ["Business Analytics that ships decisions.","Turning data into decisions 💡","Forecasting what’s next 🔮","Simplifying chaos with dashboards 📊"];
       let i=0, j=0, isDeleting=false;
       const el = document.getElementById('headline');
       function type(){
@@ -464,30 +452,8 @@
     closeToast.addEventListener('click', ()=> toast.classList.remove('show'));
     setTimeout(showToast, 800);
 
-    // ----- Video modal logic -----
-    const modal = document.getElementById('playerModal');
-    const player = document.getElementById('player');
-    const modalClose = document.getElementById('modalClose');
-
-    function openVideo(src, title){
-      document.getElementById('modalTitle').textContent = title;
-      player.src = src;
-      modal.classList.add('show');
-      player.play().catch(()=>{}); // starts muted for autoplay policy
-    }
-    function closeVideo(){
-      player.pause();
-      player.removeAttribute('src'); // unload
-      player.load();
-      modal.classList.remove('show');
-    }
-    modalClose.addEventListener('click', closeVideo);
-    modal.addEventListener('click', (e)=>{ if(e.target===modal) closeVideo(); });
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && modal.classList.contains('show')) closeVideo(); });
-
-    // Wire click handlers (PDF + Video)
+    // Wire click handlers (for popularity + top picks)
     function wireActions(){
-      // PDFs
       document.querySelectorAll('.open-link').forEach(a=>{
         a.addEventListener('click', (e)=>{
           const title = e.currentTarget.getAttribute('data-title');
@@ -495,35 +461,12 @@
           renderTopPicks(); renderGrid();
         }, { passive: true });
       });
-      // Videos
-      document.querySelectorAll('.open-video').forEach(btn=>{
-        btn.addEventListener('click', (e)=>{
-          const t = e.currentTarget.getAttribute('data-title');
-          const src = e.currentTarget.getAttribute('data-src');
-          incrementClick(t);
-          openVideo(src, t);
-          renderTopPicks(); renderGrid();
-        });
-      });
     }
 
     // ----- Initial render -----
     document.getElementById('avatar').src = 'Headshot cropped.jpg';
     document.getElementById('resumeLink').href = RESUME_PATH;
     document.getElementById('contactBtn').addEventListener('click', ()=>{ location.href='mailto:parthghosh97@gmail.com?subject=Let%27s%20build%20something%20cool'; });
-
-    function renderTopPicks(){ /* redefined after computeTopPicks */ }
-    // redefine with closure populated
-    (function(){
-      const _renderTopPicks = function(){
-        const featuredGrid=document.getElementById('featuredGrid');
-        const list=computeTopPicks();
-        featuredGrid.innerHTML='';
-        list.forEach(p=>{ const c=document.createElement('article'); c.className='card'; c.innerHTML=makeCardHTML(p); featuredGrid.appendChild(c); });
-        wireActions();
-      };
-      window.renderTopPicks = _renderTopPicks;
-    })();
 
     function init(){ renderFilters(); renderTopPicks(); renderGrid(); }
     init();
