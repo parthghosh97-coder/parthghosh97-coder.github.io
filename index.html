@@ -284,3 +284,25 @@
   </script>
 </body>
 </html>
+<script>
+// ...your existing code above (including partyPulse and keydown listener)
+
+// Mobile: double-tap Vibe Switch to trigger confetti
+let lastTap = 0;
+themeSwitch.addEventListener('touchend', () => {
+  const now = Date.now();
+  if (now - lastTap < 350) partyPulse();
+  lastTap = now;
+}, { passive: true });
+
+// Mobile: long-press the "Currently vibing to" text to trigger confetti
+const npEl = document.getElementById('nowPlaying');
+let pressTimer;
+if (npEl) {
+  npEl.addEventListener('touchstart', () => {
+    pressTimer = setTimeout(partyPulse, 600); // hold ~0.6s
+  }, { passive: true });
+  npEl.addEventListener('touchend', () => clearTimeout(pressTimer));
+  npEl.addEventListener('touchmove', () => clearTimeout(pressTimer)); // cancel if finger moves
+}
+</script>
