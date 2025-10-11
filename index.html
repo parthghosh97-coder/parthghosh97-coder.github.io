@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Parth Ghosh • Portfolio</title>
 
+  <!-- Social previews -->
   <meta name="description" content="Parth Ghosh — Business Analytics portfolio. Predictive modeling, dashboards, marketing analytics." />
   <meta property="og:title" content="Parth Ghosh • Business Analytics Portfolio">
   <meta property="og:description" content="Predictive modeling, dashboards, and marketing analytics. Clear, outcome-focused work in Python, SQL, Power BI, and Tableau.">
@@ -13,175 +14,378 @@
   <meta name="twitter:card" content="summary">
 
   <style>
-    /* THEME VARIABLES */
-    :root {
-      --bg:#ffffff; --text:#111111; --panel:#ffffff; --border:#e5e5e5;
+    /* =========================
+       THEME VARIABLES (safe)
+       ========================= */
+    :root{
+      --bg:#ffffff; --text:#111111; --muted:#5a5a5a;
+      --panel:#ffffff; --border:#e5e5e5;
       --btn-bg:transparent; --btn-text:#111111; --btn-border:#111111;
       --link:#111111;
+      --chip-bg:#f6f6f6; --chip-text:#111111;
+      --shadow:0 6px 20px rgba(0,0,0,.08);
+      --radius:16px;
     }
-    :root[data-theme="dark"] {
-      --bg:#0b0b0b; --text:#f2f2f2; --panel:#121212; --border:#1e1e1e;
+    :root[data-theme="dark"]{
+      --bg:#0b0b0b; --text:#f2f2f2; --muted:#b9b9b9;
+      --panel:#121212; --border:#1e1e1e;
       --btn-bg:transparent; --btn-text:#f2f2f2; --btn-border:#f2f2f2;
       --link:#f2f2f2;
+      --chip-bg:#1a1d22; --chip-text:#e7e7e7;
+      --shadow:0 8px 26px rgba(0,0,0,.35);
     }
 
-    html, body {
-      background: var(--bg);
-      color: var(--text);
-      margin: 0;
-      font-family: system-ui, Arial, sans-serif;
-    }
+    /* ========== Base ========== */
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,Segoe UI,Arial,sans-serif}
+    a{color:var(--link);text-decoration:none;transition:opacity .2s}
+    a:hover{opacity:.9}
+    img{max-width:100%;display:block}
 
-    a { color: var(--link); text-decoration: none; }
-    a:hover { opacity: 0.8; }
+    .wrap{max-width:1100px;margin:0 auto;padding:20px}
 
-    nav {
-      display: flex; justify-content: flex-end; gap: 16px; padding: 20px;
+    /* ========== Nav (sticky) ========== */
+    nav{position:sticky;top:0;background:var(--bg);z-index:50;border-bottom:1px solid var(--border)}
+    .navin{display:flex;justify-content:flex-end;gap:16px;align-items:center;padding:10px 0}
+    .navin a{font-size:14px}
+    .btn,button{
+      display:inline-block;padding:10px 14px;border:1px solid var(--btn-border);
+      color:var(--btn-text);background:var(--btn-bg);border-radius:10px;font-size:14px;cursor:pointer;transition:all .25s
     }
+    .btn:hover,button:hover{background:var(--btn-text);color:var(--bg);border-color:var(--btn-text)}
 
-    .btn {
-      display: inline-block;
-      padding: 10px 16px;
-      border: 1px solid var(--btn-border);
-      color: var(--btn-text);
-      background: var(--btn-bg);
-      border-radius: 10px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.25s ease;
+    /* Floating theme toggle (Vibe Switch icon) */
+    .theme-toggle{
+      position:fixed;right:16px;bottom:16px;width:44px;height:44px;border-radius:50%;
+      border:1px solid var(--btn-border);background:var(--bg);color:var(--btn-text);
+      cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s;box-shadow:var(--shadow)
     }
-    .btn:hover {
-      background: var(--btn-text);
-      color: var(--bg);
-    }
+    .theme-toggle:hover{background:var(--btn-text);color:var(--bg)}
 
-    header { text-align: center; padding: 40px 20px 20px; }
-    .site-title { font-size: 32px; font-weight: 700; margin: 10px 0; color: var(--text); }
-    .tagline { font-size: 16px; max-width: 600px; margin: 0 auto; line-height: 1.6; color: var(--text); }
-
-    .theme-toggle {
-      position: fixed; top: 15px; right: 15px;
-      border-radius: 50%; border: 1px solid var(--btn-border);
-      background: var(--bg); color: var(--btn-text);
-      width: 38px; height: 38px; font-size: 16px; cursor: pointer;
-      transition: all 0.25s ease;
+    /* ========== Hero ========== */
+    header{padding:24px 0 0}
+    .hero{display:grid;grid-template-columns:110px 1fr;gap:18px;align-items:center}
+    .avatar{
+      width:110px;height:110px;border-radius:999px;border:1px solid var(--border);object-fit:cover;background:linear-gradient(135deg,#dcdcdc,#f3f3f3)
     }
-    .theme-toggle:hover { background: var(--btn-text); color: var(--bg); }
+    .site-title{font-size:30px;font-weight:700;margin:4px 0;color:var(--text)}
+    .tagline{margin:2px 0 8px;color:var(--text);line-height:1.55;max-width:75ch}
+    .open-to{color:var(--muted);font-size:15px;margin:0 0 10px}
 
-    section { max-width: 1000px; margin: 0 auto; padding: 20px; }
-    .grid {
-      display: grid; gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    }
-    .card {
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: var(--panel);
-      padding: 16px;
-      transition: 0.3s ease;
-    }
-    .card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.08); transform: translateY(-2px); }
-    .card h3 { margin-top: 0; }
+    .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 0}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
+    .chip{padding:6px 10px;border:1px solid var(--border);border-radius:999px;background:var(--chip-bg);color:var(--chip-text);font-size:12px}
 
-    footer {
-      text-align: center; padding: 20px;
-      font-size: 14px; color: var(--text);
-      border-top: 1px solid var(--border);
-      margin-top: 40px;
+    /* ========== Sections ========== */
+    section{padding:26px 0}
+    h2{font-size:22px;margin:0 0 12px}
+
+    /* ========== Project Grid with animation ========== */
+    .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .card{
+      border:1px solid var(--border);border-radius:var(--radius);background:var(--panel);padding:16px;
+      transition:transform .25s, box-shadow .25s, opacity .6s, transform .6s;
+      opacity:0;transform:translateY(16px)
+    }
+    .card h3{margin:6px 0 8px;font-size:18px}
+    .card p{margin:0 0 12px;line-height:1.45}
+    .card .actions{display:flex;gap:10px;flex-wrap:wrap}
+    .card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+    .card.reveal{opacity:1;transform:translateY(0)}
+
+    /* ========== Footer ========== */
+    footer{text-align:center;padding:18px 0;border-top:1px solid var(--border);font-size:14px;margin-top:24px}
+    .tip{margin-top:8px;font-size:13px;opacity:.85}
+
+    /* ========== Confetti Canvas ========== */
+    #confetti{position:fixed;inset:0;pointer-events:none;z-index:9999;display:none}
+
+    @media (max-width:640px){
+      .hero{grid-template-columns:84px 1fr}
+      .avatar{width:84px;height:84px}
     }
   </style>
 </head>
-
 <body>
-  <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
+  <!-- Confetti canvas -->
+  <canvas id="confetti"></canvas>
 
+  <!-- Floating theme toggle -->
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" onclick="toggleTheme()">☀️</button>
+
+  <!-- Sticky nav -->
   <nav>
-    <a href="#projects">Projects</a>
-    <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
-    <a href="https://github.com/parthghosh97-coder" target="_blank" rel="noopener">GitHub</a>
-    <a href="https://www.linkedin.com/in/parth-ghosh-736669226" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="#contact">Contact</a>
+    <div class="wrap navin">
+      <a href="#projects">Projects</a>
+      <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <a href="https://github.com/parthghosh97-coder" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/parth-ghosh-736669226" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#contact">Contact</a>
+      <button class="btn" id="vibeBtn" type="button">Vibe Switch</button>
+    </div>
   </nav>
 
-  <header>
-    <div class="site-title">Parth Ghosh</div>
-    <p class="tagline">
-      I am Parth Ghosh, a Business Analytics & Marketing Analytics professional skilled in predictive modeling, dashboards,
-      and data-driven storytelling using Python, Power BI, Tableau, and SPSS.
-    </p>
-  </header>
+  <div class="wrap">
+    <!-- Hero -->
+    <header>
+      <div class="hero">
+        <!-- Your uploaded headshot -->
+        <img class="avatar" src="Headshot%20cropped.jpg" alt="Parth Ghosh headshot"
+             onerror="this.onerror=null; this.style.background='linear-gradient(135deg,#c9c9c9,#e8e8e8)'; this.src='';" />
+        <div>
+          <div class="site-title">Parth Ghosh</div>
 
-  <section id="projects">
-    <h2>Featured Projects</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Expedia Global Expansion Strategy</h3>
-        <p>Forecasted $381.6M revenue uplift using predictive modeling and stopover program design.</p>
-        <a class="btn" href="projects/Expedia_Global_Expansion/Expedia_Stopover_Program.pdf" target="_blank" rel="noopener">View Report</a>
+          <!-- Business Analytics Bio -->
+          <p class="tagline">
+            I am Parth Ghosh, a Business Analytics professional who turns data into decisions. I build
+            predictive models, dashboards, and clear narratives that influence product, marketing, and revenue.
+            My toolkit spans Python, SQL, Power BI, Tableau, and SPSS, and I’ve delivered outcomes from lift in
+            campaign performance to executive-ready strategy decks.
+          </p>
+
+          <!-- Open to roles -->
+          <div class="open-to">
+            Open to roles: <strong>Data Analyst</strong>, <strong>Marketing Analyst</strong>,
+            <strong>Business Analyst</strong>, <strong>Business Intelligence</strong> (US — remote or hybrid).
+          </div>
+
+          <!-- Recruiter CTAs -->
+          <div class="cta-row">
+            <a class="btn" href="resume.pdf" target="_blank" rel="noopener">View Resume</a>
+            <a class="btn" href="mailto:parthghosh97@gmail.com">Email</a>
+            <a class="btn" href="https://www.linkedin.com/in/parth-ghosh-736669226" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn" href="https://github.com/parthghosh97-coder" target="_blank" rel="noopener">GitHub</a>
+          </div>
+
+          <!-- Skills -->
+          <div class="chips">
+            <span class="chip">Python</span><span class="chip">SQL</span><span class="chip">Power BI</span>
+            <span class="chip">Tableau</span><span class="chip">SPSS</span>
+            <span class="chip">Predictive Modeling</span><span class="chip">Marketing Analytics</span>
+          </div>
+        </div>
       </div>
+    </header>
 
-      <div class="card">
-        <h3>Reddit UGC Dashboard</h3>
-        <p>Power BI dashboard visualizing engagement trends and sentiment across Reddit discussions.</p>
-        <a class="btn" href="projects/Reddit_Dashboard/reddit_dashboard.pbix" target="_blank" rel="noopener">Download PBIX</a>
+    <!-- Projects (cards use EXACT filenames you showed) -->
+    <section id="projects">
+      <h2>Featured Projects</h2>
+      <div class="grid" id="projectGrid">
+        <article class="card" data-animate>
+          <h3>Expedia Stop Over Program</h3>
+          <p>Stopover program business case and forecast; growth roadmap and modeling.</p>
+          <div class="actions">
+            <a class="btn" href="Expedia%20Stop%20Over%20Program.pdf" target="_blank" rel="noopener">View Report</a>
+          </div>
+        </article>
+
+        <article class="card" data-animate>
+          <h3>Airbnb Text & Data Analysis</h3>
+          <p>NLP + data exploration on listing descriptions explaining price and engagement.</p>
+          <div class="actions">
+            <a class="btn" href="Airbnb%20Text%20and%20Data%20Analysis%20Report.pdf" target="_blank" rel="noopener">View Report</a>
+            <a class="btn" href="airbnb%20anlysis%20and%20dashboard%20tableau.twb" target="_blank" rel="noopener">Download Tableau TWB</a>
+          </div>
+        </article>
+
+        <article class="card" data-animate>
+          <h3>Air France Analysis</h3>
+          <p>Campaign performance and media optimization recommendations.</p>
+          <div class="actions">
+            <a class="btn" href="Air%20France%20analysis.pdf" target="_blank" rel="noopener">View Report</a>
+          </div>
+        </article>
+
+        <article class="card" data-animate>
+          <h3>US Sales Dashboard Insights</h3>
+          <p>Sales KPIs and regional trends summarized for executives.</p>
+          <div class="actions">
+            <a class="btn" href="US%20Sales%20Dashboard%20Insights%202017.pdf" target="_blank" rel="noopener">View PDF</a>
+          </div>
+        </article>
+
+        <article class="card" data-animate>
+          <h3>Reddit UGC Dashboard (Power BI)</h3>
+          <p>Sentiment and engagement trends across Reddit discussions (download PBIX).</p>
+          <div class="actions">
+            <a class="btn" href="User-generated%20content%20analysis%20power%20bi%20dashboard.pbix" target="_blank" rel="noopener">Download PBIX</a>
+          </div>
+        </article>
+
+        <article class="card" data-animate>
+          <h3>Pillsbury Cookie Challenge</h3>
+          <p>Consumer segmentation and brand positioning with clear actions.</p>
+          <div class="actions">
+            <a class="btn" href="pillsbury%20cookie%20challenge%20.pdf" target="_blank" rel="noopener">View Report</a>
+          </div>
+        </article>
+
+        <article class="card" data-animate>
+          <h3>Shiva Tourist Dhaba</h3>
+          <p>SPSS discriminant analysis—loyalty drivers and recommendations.</p>
+          <div class="actions">
+            <a class="btn" href="shiva%20tourist%20dhaba%20.pdf" target="_blank" rel="noopener">View Report</a>
+          </div>
+        </article>
+
+        <article class="card" data-animate>
+          <h3>Business Challenge</h3>
+          <p>Predictive modeling case write-up.</p>
+          <div class="actions">
+            <a class="btn" href="business%20challenge%203%20.pdf" target="_blank" rel="noopener">View PDF</a>
+          </div>
+        </article>
+
+        <!-- Optional: Dataiku sample (update href if the exact filename differs) -->
+        <article class="card" data-animate>
+          <h3>Dataiku ML Sample (Car Images)</h3>
+          <p>Machine learning sample workflow and documentation.</p>
+          <div class="actions">
+            <a class="btn" href="Dataiku%20Machine%20Learning%20Sample%20for%20Car%20Images.pdf" target="_blank" rel="noopener">View PDF</a>
+          </div>
+        </article>
       </div>
+    </section>
 
-      <div class="card">
-        <h3>Ancestry Sales Strategy</h3>
-        <p>Sales and BI strategy analysis using CRM systems, AI forecasting, and customer value modeling.</p>
-        <a class="btn" href="projects/Ancestry_Sales_Strategy/Ancestry_Sales_Strategy_Report_Final_Polished.docx" target="_blank" rel="noopener">View Report</a>
-      </div>
+    <!-- Contact -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <p><a class="btn" href="mailto:parthghosh97@gmail.com">Email Me</a></p>
+    </section>
 
-      <div class="card">
-        <h3>Airbnb Listing Text Analysis</h3>
-        <p>Text mining and sentiment analysis to find price and occupancy drivers using R and MongoDB.</p>
-        <a class="btn" href="projects/Airbnb_Text_Analysis/Airbnb_Listing_Text_Analysis_FINAL.pdf" target="_blank" rel="noopener">View Report</a>
-      </div>
-
-      <div class="card">
-        <h3>Facebook Live Engagement Clustering</h3>
-        <p>PCA + K-Means + logistic model to predict high-engagement content.</p>
-        <a class="btn" href="projects/Facebook_Live_Clustering/Facebook_Live_Clustering_FINAL.pdf" target="_blank" rel="noopener">View Report</a>
-      </div>
-
-      <div class="card">
-        <h3>Shiva Tourist Dhaba Loyalty Analysis</h3>
-        <p>SPSS discriminant analysis to identify loyalty drivers and positioning.</p>
-        <a class="btn" href="projects/Shiva_Tourist_Dhaba/Shiva_Tourist_Dhaba_Report_Final_100.pdf" target="_blank" rel="noopener">View Report</a>
-      </div>
-
-      <div class="card">
-        <h3>Pillsbury Cookie Challenge</h3>
-        <p>Consumer segmentation and emotional branding strategy through U&amp;A study insights.</p>
-        <a class="btn" href="projects/Pillsbury_Cookie_Challenge/Pillsbury_Assignment_Final_Updated.docx" target="_blank" rel="noopener">View Report</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:parthghosh97@gmail.com">parthghosh97@gmail.com</a></p>
-  </section>
-
-  <footer>© 2025 Parth Ghosh — Business Analytics Portfolio</footer>
+    <!-- Footer with vibe line and confetti tip -->
+    <footer>
+      <div>Built by Parth Ghosh. Theme saved on your device.</div>
+      <div>Currently vibing to: <span id="vibeNow">Loading</span></div>
+      <div class="tip">Confetti tip: press V on desktop, double tap Vibe Switch, or long press the currently vibing line.</div>
+    </footer>
+  </div>
 
   <script>
+    /* =========================
+       Theme init and toggle
+       ========================= */
     (function(){
       const saved = localStorage.getItem('theme');
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       const theme = saved || (prefersDark ? 'dark' : 'light');
       document.documentElement.setAttribute('data-theme', theme);
-      document.querySelector('.theme-toggle').textContent = theme === 'dark' ? '🌙' : '☀️';
+      const icon = document.getElementById('themeToggle');
+      if(icon) icon.textContent = theme === 'dark' ? '🌙' : '☀️';
     })();
 
     function toggleTheme(){
       const root = document.documentElement;
-      const btn = document.querySelector('.theme-toggle');
+      const icon = document.getElementById('themeToggle');
       const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       root.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
-      btn.textContent = next === 'dark' ? '🌙' : '☀️';
+      if(icon) icon.textContent = next === 'dark' ? '🌙' : '☀️';
     }
+
+    /* =========================
+       Card reveal animation
+       ========================= */
+    (function(){
+      const cards = document.querySelectorAll('.card[data-animate]');
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('reveal'); io.unobserve(e.target); } });
+      }, {root:null, rootMargin:"0px 0px -10% 0px", threshold:0.1});
+      cards.forEach(c=>io.observe(c));
+    })();
+
+    /* =========================
+       Vibe line
+       ========================= */
+    (function(){
+      const el = document.getElementById('vibeNow');
+      if(!el) return;
+      const tracks = [
+        "Badli Si Hawa Hai",
+        "HI LO b2b Oliver Heldens",
+        "Late night lofi focus",
+        "Kendrick deep cuts",
+        "Travis studio vibes"
+      ];
+      el.textContent = tracks[Math.floor(Math.random()*tracks.length)];
+    })();
+
+    /* =========================
+       Confetti (lightweight)
+       ========================= */
+    const Confetti = (function(){
+      let canvas, ctx, w, h, pieces = [], running = false, rafId;
+      function rand(min,max){ return Math.random()*(max-min)+min; }
+      function resize(){ w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+      function spawn(n=150){
+        pieces.length = 0;
+        for(let i=0;i<n;i++){
+          pieces.push({
+            x: rand(0,w), y: rand(-h*0.2, -20),
+            r: rand(2,4), vx: rand(-1,1), vy: rand(2,4),
+            a: rand(0,Math.PI*2), va: rand(-0.1,0.1)
+          });
+        }
+      }
+      function draw(){
+        ctx.clearRect(0,0,w,h);
+        for(const p of pieces){
+          p.x += p.vx; p.y += p.vy; p.a += p.va;
+          if(p.y > h+10) p.y = -10;
+          ctx.save();
+          ctx.translate(p.x,p.y);
+          ctx.rotate(p.a);
+          ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--btn-text') || '#111111';
+          ctx.fillRect(-p.r,-p.r, p.r*2, p.r*2);
+          ctx.restore();
+        }
+        rafId = requestAnimationFrame(draw);
+      }
+      function start(){
+        if(running) return;
+        running = true;
+        canvas.style.display = 'block';
+        resize(); spawn();
+        draw();
+        setTimeout(stop, 1200);
+      }
+      function stop(){
+        running = false;
+        cancelAnimationFrame(rafId);
+        canvas.style.display = 'none';
+      }
+      function init(){
+        canvas = document.getElementById('confetti');
+        if(!canvas) return;
+        ctx = canvas.getContext('2d');
+        resize();
+        window.addEventListener('resize', resize);
+      }
+      return { init, start };
+    })();
+    Confetti.init();
+
+    // Triggers: key V, double tap vibe switch, long press on vibe line
+    document.addEventListener('keydown', (e)=>{ if(e.key && e.key.toLowerCase()==='v') Confetti.start(); });
+    (function(){
+      const btn = document.getElementById('vibeBtn');
+      if(btn){
+        let last = 0;
+        btn.addEventListener('click', ()=>{
+          const now = Date.now();
+          if(now - last < 350){ Confetti.start(); }
+          last = now;
+        });
+      }
+      const line = document.getElementById('vibeNow');
+      if(line){
+        let t;
+        const on = ()=>{ t=setTimeout(()=>Confetti.start(), 550); };
+        const off = ()=>{ clearTimeout(t); };
+        line.addEventListener('mousedown', on); line.addEventListener('mouseup', off); line.addEventListener('mouseleave', off);
+        line.addEventListener('touchstart', on, {passive:true}); line.addEventListener('touchend', off);
+      }
+    })();
   </script>
 </body>
 </html>
