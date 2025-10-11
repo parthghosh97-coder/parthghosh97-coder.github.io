@@ -1,490 +1,258 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Parth Ghosh • Portfolio</title>
-  <meta name="description" content="Parth Ghosh — Business Analytics portfolio. Predictive modeling, dashboards, marketing analytics." />
 
-  <!-- Open Graph / Twitter -->
-  <meta property="og:title" content="Parth Ghosh • Business Analytics Portfolio">
-  <meta property="og:description" content="Predictive modeling, dashboards, and marketing analytics. Clear, outcome-focused work in Python, SQL, Power BI, and Tableau.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://parthghosh97-coder.github.io/">
-  <meta name="twitter:card" content="summary">
-
+  <!-- ===== THEME VARIABLES ===== -->
   <style>
-    :root{
-      --bg:#0b0c10; --panel:#111218; --card:#151724; --text:#e8e8ea; --sub:#b6b7c1;
-      --brand:#7c5cff; --ring:rgba(124,92,255,.35); --shadow:0 20px 40px rgba(0,0,0,.35);
-      --switchBorder: rgba(124,92,255,.45); --switchText:#e8e8ea; --switchDot:#ffffff;
-      --toastBg: rgba(20,20,30,.9);
-    }
-    .light{
-      --bg:#f7f8fc; --panel:#ffffff; --card:#ffffff; --text:#0f1222; --sub:#4b4e66;
-      --brand:#5b4bff; --ring:rgba(91,75,255,.25); --shadow:0 18px 36px rgba(16,24,40,.08);
-      --switchBorder: rgba(91,75,255,.55); --switchText:#0f1222; --switchDot:#dcdcff;
-      --toastBg: rgba(255,255,255,.98);
-    }
-    *{box-sizing:border-box}
-
-    /* Respect users who prefer less motion */
-    @media (prefers-reduced-motion: reduce){
-      *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --panel: #ffffff;
+      --border: #e5e5e5;
+      --btn-bg: transparent;
+      --btn-text: #111111;
+      --btn-border: #111111;
+      --link: #111111;
     }
 
-    /* Animated gradient background */
-    body{
-      margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text);line-height:1.55;
-      background: linear-gradient(-45deg, #0b0c10, #111218, #151724, #0b0c10);
-      background-size: 400% 400%;
-      animation: bgShift 14s ease infinite;
-    }
-    @keyframes bgShift{
-      0%{background-position:0% 50%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 50%}
+    :root[data-theme="dark"] {
+      --bg: #0b0b0b;
+      --text: #f2f2f2;
+      --panel: #121212;
+      --border: #1e1e1e;
+      --btn-bg: transparent;
+      --btn-text: #f2f2f2;
+      --btn-border: #f2f2f2;
+      --link: #f2f2f2;
     }
 
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:1100px;margin:0 auto;padding:28px 18px}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
-
-    /* Name — explicit color + theme-aware text-shadow for contrast */
-    .name{
-      font-weight:800;letter-spacing:.2px;font-size:22px;
-      color:var(--text);
-      text-shadow:0 1px 0 rgba(0,0,0,.35);
-    }
-    .light .name{ text-shadow:0 1px 0 rgba(255,255,255,.6); }
-
-    /* Buttons + hover glow */
-    .btn{
-      display:inline-flex;align-items:center;gap:8px;background:var(--panel);
-      border:1px solid rgba(124,92,255,.15);padding:10px 14px;border-radius:14px;
-      box-shadow:var(--shadow);transition:.2s ease;font-weight:600
-    }
-    /* Ensure <button> matches <a> style exactly */
-    button.btn{
-      all:unset; display:inline-flex; align-items:center; justify-content:center;
-      font:inherit; cursor:pointer; background:var(--panel);
-      border:1px solid rgba(124,92,255,.15); padding:10px 14px; border-radius:14px;
-      box-shadow:var(--shadow); transition:.2s ease; font-weight:600;
+    /* ===== GLOBAL STYLES ===== */
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      font-family: system-ui, Arial, sans-serif;
     }
 
-    .btn.brand{background:linear-gradient(180deg,var(--brand),#5842ff);color:#fff;border-color:transparent}
-    .btn.ghost{background:transparent;border-color:rgba(124,92,255,.25)}
-    .btn:hover{box-shadow:0 0 15px var(--brand), inset 0 0 8px var(--brand); transform: translateY(-2px)}
-    .btn:focus-visible{outline:2px solid var(--brand); box-shadow:0 0 0 4px var(--ring)}
-
-    .btnbar{display:flex;gap:10px;flex-wrap:wrap}
-    .hero{margin-top:30px;display:grid;grid-template-columns:1.2fr .8fr;gap:26px}
-    @media (max-width:860px){.hero{grid-template-columns:1fr}}
-    .panel{background:var(--panel);border:1px solid rgba(124,92,255,.12);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
-
-    .bio h1{font-size:28px;margin:8px 0 6px;min-height:1.6em}
-    .bio p{color:var(--sub);margin:10px 0 0;font-size:15.5px}
-    .opento{margin-top:10px;font-size:13.5px;color:var(--sub)}
-
-    /* Animated skill chips (staggered) */
-    .chip{
-      display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;
-      border:1px solid rgba(124,92,255,.2);background:rgba(124,92,255,.08);margin:6px 8px 0 0;
-      font-weight:600;font-size:13px; opacity:.9; animation: fadeChip 8s infinite
+    a {
+      color: var(--link);
+      text-decoration: none;
+      transition: 0.2s ease;
     }
-    @keyframes fadeChip{0%,100%{opacity:.9}50%{opacity:1}}
-    .chip:nth-child(1){animation-delay:0s}
-    .chip:nth-child(2){animation-delay:.6s}
-    .chip:nth-child(3){animation-delay:1.2s}
-    .chip:nth-child(4){animation-delay:1.8s}
-    .chip:nth-child(5){animation-delay:2.4s}
-    .chip:nth-child(6){animation-delay:3s}
 
-    .avatar{width:100%;border-radius:18px;height:100%;object-fit:cover;border:1px solid rgba(124,92,255,.18)}
-
-    .section{margin-top:32px}
-    .sechead{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:12px;flex-wrap:wrap}
-    .sechead h2{margin:0;font-size:20px}
-    .filterbar{display:flex;gap:8px;flex-wrap:wrap}
-    .tag{border:1px solid rgba(124,92,255,.22);background:var(--card);padding:8px 12px;border-radius:12px;cursor:pointer;font-weight:600;font-size:13px}
-    .tag.active{outline:2px solid var(--ring);box-shadow:0 0 0 3px var(--ring)}
-    .tag:focus-visible{outline:2px solid var(--brand); box-shadow:0 0 0 4px var(--ring)}
-    .search{display:flex;gap:8px;align-items:center}
-    .input{flex:1;min-width:220px;background:var(--panel);border:1px solid rgba(124,92,255,.2);border-radius:14px;padding:10px 12px;color:var(--text)}
-
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    @media (max-width:1024px){.grid{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:640px){.grid{grid-template-columns:1fr}}
-
-    /* Card + 3D tilt */
-    .card{
-      background:var(--card);border:1px solid rgba(124,92,255,.12);border-radius:18px;
-      overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);
-      transition:transform .25s ease,box-shadow .25s ease; transform-style:preserve-3d; perspective:800px
+    a:hover {
+      opacity: 0.8;
     }
-    .card:hover{transform: translateY(-5px) rotateY(5deg) rotateX(3deg) scale(1.02);box-shadow:0 18px 36px rgba(124,92,255,.35)}
 
-    /* PURE CSS THUMB (no images) */
-    .thumb{width:100%;aspect-ratio:16/9;background:linear-gradient(120deg,#151224,#101a3a); position:relative; overflow:hidden}
-    .thumb::after{content:''; position:absolute; inset:0; background:
-      radial-gradient(600px 200px at -10% 0%, rgba(124,92,255,.25), transparent 60%),
-      radial-gradient(400px 160px at 110% 40%, rgba(88,66,255,.2), transparent 55%);
-      opacity:.9}
-
-    .card-body{padding:14px 14px 16px}
-    .title{font-weight:700;font-size:16.5px;margin:2px 0 4px}
-    .desc{color:var(--sub);font-size:14px;margin:0 0 8px}
-    .badges{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}
-    .badge{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid rgba(124,92,255,.22);background:transparent}
-    .badge.featured{background:linear-gradient(180deg,var(--brand),#5842ff);color:#fff;border-color:transparent}
-    .badge.popular{border-color:rgba(255,120,80,.5); color:#ffb39a}
-    .links{display:flex;gap:8px;margin-top:auto}
-
-    .footer{margin:28px 0 6px;color:var(--sub);font-size:13px;text-align:center}
-
-    /* VIBE SWITCH — crisp contrast + pulse */
-    .switch{
-      position:relative;display:inline-flex;align-items:center;gap:10px;
-      background:var(--panel);border:2px solid var(--switchBorder);
-      border-radius:999px;cursor:pointer;padding:8px 14px; box-shadow:0 0 0 2px rgba(0,0,0,.25)
+    h1, h2, h3 {
+      color: var(--text);
     }
-    .switch:focus-visible{outline:2px solid var(--brand); box-shadow:0 0 0 4px var(--ring)}
-    .dot{height:20px;width:20px;background:var(--switchDot);border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.35)}
-    .switch .label{font-weight:800;font-size:13px;color:var(--switchText);letter-spacing:.2px}
-    .switch:active .dot{ box-shadow: 0 0 20px 6px var(--brand); transition: box-shadow .4s ease }
 
-    /* Background accent + party pulse */
-    body::before{content:''; position:fixed; inset:0; background:
-      radial-gradient(circle at 20% 20%, rgba(124,92,255,.12), transparent 60%),
-      radial-gradient(circle at 80% 30%, rgba(88,66,255,.10), transparent 55%);
-      pointer-events:none; transition:opacity .4s ease}
-    @keyframes pulseGlow{0%{box-shadow:0 0 0 0 rgba(124,92,255,.35)}100%{box-shadow:0 0 0 24px rgba(124,92,255,0)}}
-    .party .panel{animation:pulseGlow .9s ease 2}
-
-    /* Toast */
-    .toast{
-      position: fixed; left: 50%; transform: translateX(-50%);
-      bottom: 18px; z-index: 9999; background: var(--toastBg); color: var(--text);
-      border: 1px solid rgba(124,92,255,.25); border-radius: 14px; padding: 12px 14px;
-      font-size: 13.5px; display:flex; align-items:center; gap:10px;
-      box-shadow: 0 12px 30px rgba(0,0,0,.35); backdrop-filter: blur(6px);
-      opacity: 0; pointer-events: none; transition: opacity .25s ease, transform .25s ease;
+    /* ===== NAVIGATION ===== */
+    nav {
+      display: flex;
+      justify-content: flex-end;
+      gap: 16px;
+      padding: 20px;
     }
-    .toast.show{ opacity: 1; pointer-events: auto; transform: translate(-50%, -6px) }
-    .toast .close{cursor:pointer; border:0; background:transparent; color:var(--sub); font-size:16px; line-height:1}
+
+    nav a {
+      font-size: 14px;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+
+    .site-title {
+      font-size: 32px;
+      font-weight: 700;
+      margin: 10px 0;
+      color: var(--text);
+    }
+
+    .tagline {
+      font-size: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-block;
+      padding: 10px 16px;
+      border: 1px solid var(--btn-border);
+      color: var(--btn-text);
+      background: var(--btn-bg);
+      border-radius: 10px;
+      font-size: 14px;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: var(--btn-text);
+      color: var(--bg);
+    }
+
+    /* ===== THEME TOGGLE ===== */
+    .theme-toggle {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      border-radius: 50%;
+      border: 1px solid var(--btn-border);
+      background: var(--bg);
+      color: var(--btn-text);
+      width: 38px;
+      height: 38px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .theme-toggle:hover {
+      background: var(--btn-text);
+      color: var(--bg);
+    }
+
+    /* ===== PROJECTS SECTION ===== */
+    section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--panel);
+      padding: 16px;
+      transition: 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+
+    .card h3 {
+      margin-top: 0;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: var(--text);
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
   </style>
 </head>
+
 <body>
-  <div class="wrap">
-    <nav class="nav">
-      <div class="name">Parth Ghosh</div>
-      <div class="btnbar">
-        <a class="btn ghost" href="#projects">Projects</a>
-        <a class="btn brand" id="resumeLink" href="#" target="_blank" rel="noopener">Resume</a>
-        <a class="btn ghost" id="githubLink" href="https://github.com/parthghosh97-coder" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn ghost" id="linkedinLink" href="https://www.linkedin.com/in/parth-ghosh-736669226" target="_blank" rel="noopener">LinkedIn</a>
-        <button class="btn ghost" id="contactBtn">Contact</button>
-        <button class="switch" id="themeSwitch" aria-label="Toggle theme">
-          <span class="dot"></span><span class="label" id="themeLabel">Vibe Switch</span>
-        </button>
-      </div>
-    </nav>
 
-    <section class="hero">
-      <div class="panel bio">
-        <h1 id="headline">Business Analytics that ships decisions.</h1>
-        <p>I’m Parth Ghosh, a Business Analytics professional focused on turning raw data into clear, revenue-linked actions through predictive modeling, visualization, and storytelling. Experience across marketing analytics, forecasting, and sustainability using Python, SQL, Power BI, and Tableau.</p>
-        <div class="opento">Open to: Data Analyst · Marketing Analytics · BI — US remote/hybrid</div>
-        <div>
-          <span class="chip">Python</span>
-          <span class="chip">SQL</span>
-          <span class="chip">Power BI</span>
-          <span class="chip">Tableau</span>
-          <span class="chip">Marketing Analytics</span>
-          <span class="chip">Forecasting</span>
-        </div>
-      </div>
-      <div class="panel">
-        <img class="avatar" id="avatar" src="Headshot cropped.jpg" alt="Parth Ghosh portrait"/>
-      </div>
-    </section>
+  <!-- ===== THEME BUTTON ===== -->
+  <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
 
-    <!-- Top Picks -->
-    <section id="featured" class="section">
-      <div class="sechead">
-        <h2>Top Picks</h2>
+  <!-- ===== NAVIGATION ===== -->
+  <nav>
+    <a href="#projects">Projects</a>
+    <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+    <a href="https://github.com/parthghosh97-coder" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/parth-ghosh-736669226" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="site-title">Parth Ghosh</div>
+    <p class="tagline">
+      Business Analytics & Marketing Analytics professional skilled in predictive modeling, dashboards,
+      and data-driven storytelling using Python, Power BI, Tableau, and SPSS.
+    </p>
+  </header>
+
+  <!-- ===== PROJECTS SECTION ===== -->
+  <section id="projects">
+    <h2>Featured Projects</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Expedia Global Expansion Strategy</h3>
+        <p>Forecasted $381.6M revenue uplift using predictive modeling and stopover program design.</p>
+        <a class="btn" href="projects/Expedia_Global_Expansion/Expedia_Stopover_Program.pdf" target="_blank" rel="noopener">View Report</a>
       </div>
-      <div class="grid" id="featuredGrid"></div>
-    </section>
 
-    <!-- Projects -->
-    <section id="projects" class="section">
-      <div class="sechead">
-        <h2>Projects</h2>
-        <div class="search">
-          <input class="input" id="searchBox" placeholder="Search projects" />
-          <div class="filterbar" id="filterBar"></div>
-        </div>
+      <div class="card">
+        <h3>Reddit UGC Dashboard</h3>
+        <p>Power BI dashboard visualizing engagement trends and sentiment across Reddit discussions.</p>
+        <a class="btn" href="projects/Reddit_Dashboard/reddit_dashboard.pbix" target="_blank" rel="noopener">Download PBIX</a>
       </div>
-      <div class="grid" id="grid"></div>
-    </section>
 
-    <!-- Floating Quote -->
-    <div id="quote" style="text-align:center;margin-top:14px;color:var(--sub);font-style:italic;"></div>
+      <div class="card">
+        <h3>Ancestry Sales Strategy</h3>
+        <p>Sales and BI strategy analysis using CRM systems, AI forecasting, and customer value modeling.</p>
+        <a class="btn" href="projects/Ancestry_Sales_Strategy/Ancestry_Sales_Strategy_Report_Final_Polished.docx" target="_blank" rel="noopener">View Report</a>
+      </div>
 
-    <div class="footer">Built by Parth Ghosh. Theme saved on your device.<br/>
-      🎧 Currently vibing to: <span id="nowPlaying">Loading...</span>
+      <div class="card">
+        <h3>Airbnb Listing Text Analysis</h3>
+        <p>Text mining and sentiment analysis to find price and occupancy drivers using R and MongoDB.</p>
+        <a class="btn" href="projects/Airbnb_Text_Analysis/Airbnb_Listing_Text_Analysis_FINAL.pdf" target="_blank" rel="noopener">View Report</a>
+      </div>
+
+      <div class="card">
+        <h3>Pillsbury Cookie Challenge</h3>
+        <p>Consumer segmentation and emotional branding strategy through U&A study insights.</p>
+        <a class="btn" href="projects/Pillsbury_Cookie_Challenge/Pillsbury_Assignment_Final_Updated.docx" target="_blank" rel="noopener">View Report</a>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Toast -->
-  <div id="toast" class="toast" role="status" aria-live="polite">
-    <span>🎉 Confetti tip: press <b>V</b> on desktop, <b>double-tap</b> Vibe Switch, or <b>long-press</b> “Currently vibing to”.</span>
-    <button class="close" aria-label="Dismiss">✕</button>
-  </div>
+  <!-- ===== CONTACT ===== -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:parthghosh97@gmail.com">parthghosh97@gmail.com</a></p>
+  </section>
 
+  <!-- ===== FOOTER ===== -->
+  <footer>© 2025 Parth Ghosh — Business Analytics Portfolio</footer>
+
+  <!-- ===== THEME SCRIPT ===== -->
   <script>
-    // ----- CONFIG -----
-    const RESUME_PATH = 'resume.pdf';
-    const DEFAULT_TOP_PICKS = [
-      'Expedia Global Expansion Strategy',
-      'US Sales Dashboard Insights (2017)',
-      'Air France Digital Marketing Analysis'
-    ];
-    const POPULAR_THRESHOLD = 3; // show 🔥 Popular after this many clicks
-
-    const projects = [
-      { title:'Expedia Global Expansion Strategy', desc:'Stopover strategy for Iceland; forecast scenarioing and positioning recommendations.', tags:['Strategy','Forecasting','Travel'], links:{demo:'Expedia%20Stop%20Over%20Program.pdf'} },
-      { title:'Shiva Tourist Dhaba Loyalty Analysis', desc:'Loyalty segmentation via discriminant analysis; repeat-visit uplift plan.', tags:['SPSS','Segmentation','Marketing'], links:{demo:'shiva%20tourist%20dhaba%20.pdf'} },
-      { title:'Pillsbury Cookie Challenge', desc:'Consumer insight + perceptual maps; rebuild emotional connection strategy.', tags:['Marketing','Insights','Positioning'], links:{demo:'pillsbury%20cookie%20challenge%20.pdf'} },
-      { title:'Urban Heat Island Prediction (Business Challenge III)', desc:'Satellite indices + Random Forest to guide heat mitigation priorities.', tags:['Python','ML','Sustainability'], links:{demo:'business%20challenge%203%20.pdf'} },
-      { title:'Dataiku Car Image Classification', desc:'CNN pipeline classifies body types to inform production planning.', tags:['Dataiku','Computer Vision','CNN'], links:{demo:'Dataiku%20Machine%20Learning%20Sample%20for%20Car%20Images%20Classification%20to%20produce%20automobiles%20.pdf'} },
-      { title:'Airbnb Text and Data Analysis', desc:'R text mining + Tableau linking sentiment, amenities, price, and reviews.', tags:['R','Tableau','NLP'], links:{demo:'Airbnb%20Text%20and%20Data%20Analysis%20Report.pdf'} },
-      { title:'User-Generated Content Dashboard', desc:'Power BI on Reddit topics; content themes and SEO recommendations.', tags:['Power BI','UGC','Marketing'], links:{demo:'User-generated%20content%20analysis%20power%20bi%20dashboard%20.pdf'} },
-      { title:'US Sales Dashboard Insights (2017)', desc:'Driver analysis of promotion, pricing, and regions to optimize revenue.', tags:['BI','Sales','Visualization'], links:{demo:'US%20Sales%20Dashboard%20Insights%202017.pdf'} },
-      { title:'Air France Digital Marketing Analysis', desc:'Budget mix recommendations to improve ROAS and conversions.', tags:['Ads','ROAS','Analytics'], links:{demo:'Air%20France%20analysis.pdf'} }
-    ];
-
-    // ----- THEME + LINKS -----
-    const root = document.body;
-    const themeSwitch = document.getElementById('themeSwitch');
-    const themeLabel = document.getElementById('themeLabel');
-    const saved = localStorage.getItem('theme') || 'dark';
-    if(saved==='light') root.classList.add('light');
-    function setVibeLabel(){ themeLabel.textContent = root.classList.contains('light') ? '🌙 Dark Vibe' : '☀️ Light Vibe'; }
-    setVibeLabel();
-    themeSwitch.addEventListener('click', ()=>{ root.classList.toggle('light'); localStorage.setItem('theme', root.classList.contains('light')?'light':'dark'); setVibeLabel(); });
-    document.getElementById('resumeLink').href = RESUME_PATH;
-    document.getElementById('contactBtn').addEventListener('click', ()=>{ location.href='mailto:parthghosh97@gmail.com?subject=Let%27s%20build%20something%20cool'; });
-
-    // ----- CLICK TRACKING (per-visitor) -----
-    function getClicks(){
-      try{ return JSON.parse(localStorage.getItem('projectClicks')||'{}'); }catch{return {}}
-    }
-    function setClicks(map){ localStorage.setItem('projectClicks', JSON.stringify(map)); }
-    function incrementClick(title){
-      const m = getClicks(); m[title] = (m[title]||0)+1; setClicks(m);
-    }
-
-    function topPicksByClicks(){
-      const clicks=getClicks();
-      const withCounts = projects.map(p=>({...p, _c: clicks[p.title]||0}));
-      // sort by clicks desc; break ties by default priority then title
-      const priority = new Map(DEFAULT_TOP_PICKS.map((t,i)=>[t,i]));
-      withCounts.sort((a,b)=>{
-        if(b._c!==a._c) return b._c-a._c;
-        const ap = priority.has(a.title)?priority.get(a.title):999;
-        const bp = priority.has(b.title)?priority.get(b.title):999;
-        if(ap!==bp) return ap-bp;
-        return a.title.localeCompare(b.title);
-      });
-      return withCounts.slice(0,3).map(x=>({title:x.title}));
-    }
-
-    // ----- FILTERS + SEARCH -----
-    const filterBar = document.getElementById('filterBar');
-    const searchBox = document.getElementById('searchBox');
-    const grid = document.getElementById('grid');
-
-    function uniqueTags(list){ const set=new Set(); list.forEach(p=>p.tags.forEach(t=>set.add(t))); return ['All',...Array.from(set)]; }
-    let activeTag = 'All';
-
-    function renderFilters(){
-      filterBar.innerHTML='';
-      uniqueTags(projects).forEach(tag=>{
-        const b=document.createElement('button');
-        b.className='tag'+(tag===activeTag?' active':'');
-        b.textContent=tag;
-        b.addEventListener('click',()=>{ activeTag=tag; renderGrid(); renderTopPicks(); renderFilters(); });
-        b.addEventListener('keydown',(e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); b.click(); }});
-        filterBar.appendChild(b);
-      });
-    }
-
-    function matchSearch(p, q){ const text=(p.title+' '+p.desc+' '+p.tags.join(' ')).toLowerCase(); return text.includes(q.toLowerCase()); }
-
-    let currentTopPicksTitles = new Set();
-
-    function makeCardHTML(p){
-      const clicks = getClicks()[p.title]||0;
-      const isFeatured = currentTopPicksTitles.has(p.title);
-      const badges = [];
-      if(isFeatured) badges.push('<span class="badge featured">Top Pick</span>');
-      if(clicks >= POPULAR_THRESHOLD) badges.push('<span class="badge popular">🔥 Popular</span>');
-      p.tags.forEach(t=>badges.push(`<span class="badge">${t}</span>`));
-
-      return `
-        <div class="thumb" role="img" aria-label="${p.title} preview"></div>
-        <div class="card-body">
-          <div class="title">${p.title}</div>
-          <p class="desc">${p.desc}</p>
-          <div class="badges">${badges.join('')}</div>
-          <div class="links">
-            ${p.links.demo ? `<a class="btn open-link" data-title="${p.title}" href="${p.links.demo}" target="_blank" rel="noopener">Open</a>` : ''}
-          </div>
-        </div>`;
-    }
-
-    function computeTopPicks(){
-      const dynamic = topPicksByClicks().map(o=>o.title);
-      const clicks = getClicks();
-      const allZero = Object.values(clicks).every(v=>v===0);
-      const titles = allZero ? DEFAULT_TOP_PICKS : dynamic;
-      currentTopPicksTitles = new Set(titles);
-      return projects.filter(p=>currentTopPicksTitles.has(p.title)).slice(0,3);
-    }
-
-    function renderTopPicks(){
-      const featuredGrid=document.getElementById('featuredGrid');
-      const list=computeTopPicks();
-      featuredGrid.innerHTML='';
-      list.forEach(p=>{ const c=document.createElement('article'); c.className='card'; c.innerHTML=makeCardHTML(p); featuredGrid.appendChild(c); });
-      wireActions(); // include buttons in featured area
-    }
-
-    function renderGrid(){
-      const q = searchBox.value.trim();
-      const filtered = projects.filter(p => {
-        const tagOk = activeTag === 'All' || p.tags.includes(activeTag);
-        const qOk = q === '' || matchSearch(p, q);
-        return tagOk && qOk;
-      });
-      const list = (activeTag==='All' && q==='') ? filtered.filter(p=>!currentTopPicksTitles.has(p.title)) : filtered;
-      grid.innerHTML='';
-      if(list.length===0){
-        const empty=document.createElement('div');
-        empty.className='panel';
-        empty.textContent='No data found... yet 😎';
-        grid.appendChild(empty);
-        return;
-      }
-      list.forEach(p=>{ const c=document.createElement('article'); c.className='card'; c.innerHTML=makeCardHTML(p); grid.appendChild(c); });
-      wireActions();
-    }
-
-    searchBox.addEventListener('input', ()=>{ renderGrid(); });
-
-    // ----- Typing headline -----
-    (function(){
-      const lines = ["Business Analytics that ships decisions.","Turning data into decisions 💡","Forecasting what’s next 🔮","Simplifying chaos with dashboards 📊"];
-      let i=0, j=0, isDeleting=false;
-      const el = document.getElementById('headline');
-      function type(){
-        const current = lines[i];
-        el.textContent = current.slice(0, j);
-        if(!isDeleting && j < current.length){ j++; }
-        else if(isDeleting && j > 0){ j--; }
-        else if(!isDeleting && j === current.length){ isDeleting = true; return setTimeout(type, 1200); }
-        else if(isDeleting && j === 0){ isDeleting = false; i = (i+1)%lines.length; }
-        setTimeout(type, isDeleting ? 60 : 100);
-      }
-      type();
+    // Initialize saved theme
+    (function() {
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = saved || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      document.querySelector('.theme-toggle').textContent = theme === 'dark' ? '🌙' : '☀️';
     })();
 
-    // ----- Confetti (desktop + mobile) -----
-    function partyPulse(){
-      document.body.classList.add('party');
-      for(let i=0;i<24;i++){
-        const e=document.createElement('div');
-        e.textContent=['✨','🎉','🟣','🔵','⭐'][Math.floor(Math.random()*5)];
-        e.style.position='fixed'; e.style.left=Math.random()*100+'vw'; e.style.top='-10vh';
-        e.style.fontSize=(16+Math.random()*20)+'px'; e.style.transition='transform 1.8s ease, opacity 1.8s ease';
-        document.body.appendChild(e);
-        requestAnimationFrame(()=>{ e.style.transform=`translateY(${110+Math.random()*30}vh) rotate(${Math.random()*360}deg)`; e.style.opacity='0'; });
-        setTimeout(()=>e.remove(), 1900);
-      }
-      setTimeout(()=>document.body.classList.remove('party'), 1200);
+    // Toggle function
+    function toggleTheme() {
+      const root = document.documentElement;
+      const btn = document.querySelector('.theme-toggle');
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      btn.textContent = next === 'dark' ? '🌙' : '☀️';
     }
-    // Desktop: key "v"
-    document.addEventListener('keydown', (ev)=>{ if(ev.key.toLowerCase()==='v'){ partyPulse(); }} );
-    // Mobile: double-tap Vibe Switch
-    let lastTap = 0;
-    themeSwitch.addEventListener('touchend', () => {
-      const now = Date.now();
-      if (now - lastTap < 350) partyPulse();
-      lastTap = now;
-    }, { passive: true });
-    // Mobile: long-press Now Playing
-    const npEl = document.getElementById('nowPlaying');
-    let pressTimer;
-    if (npEl) {
-      npEl.addEventListener('touchstart', () => { pressTimer = setTimeout(partyPulse, 600); }, { passive: true });
-      npEl.addEventListener('touchend', () => clearTimeout(pressTimer));
-      npEl.addEventListener('touchmove', () => clearTimeout(pressTimer));
-    }
-
-    // ----- Footer "Now Playing" rotator -----
-    (function(){
-      const moods=['90210 – Travis Scott','Nights – Frank Ocean','The Plan – Travis Scott','Love – Kendrick Lamar','Self Care – Mac Miller'];
-      const np=document.getElementById('nowPlaying');
-      let i=0; if(np){ np.textContent=moods[0]; setInterval(()=>{ i=(i+1)%moods.length; np.textContent=moods[i]; }, 6000); }
-    })();
-
-    // ----- Floating Quote rotator -----
-    (function(){
-      const quotes = [
-        "Data is the new oil — but refined by insight.",
-        "Analytics turns hindsight into foresight.",
-        "Small data. Big impact.",
-        "From patterns to purpose."
-      ];
-      const q = document.getElementById('quote');
-      let qi = 0; if(q){ q.textContent = quotes[0]; setInterval(()=>{ qi=(qi+1)%quotes.length; q.textContent = quotes[qi]; }, 6000); }
-    })();
-
-    // ----- Toast hint (dismissible) -----
-    const toast = document.getElementById('toast');
-    const closeToast = toast.querySelector('.close');
-    function showToast(){
-      const last = parseInt(localStorage.getItem('toastTime')||'0',10);
-      const now = Date.now();
-      if (now - last < 24*60*60*1000) return;
-      toast.classList.add('show');
-      localStorage.setItem('toastTime', String(now));
-      setTimeout(()=>toast.classList.remove('show'), 7000);
-    }
-    closeToast.addEventListener('click', ()=> toast.classList.remove('show'));
-    setTimeout(showToast, 800);
-
-    // Wire click handlers (for popularity + top picks)
-    function wireActions(){
-      document.querySelectorAll('.open-link').forEach(a=>{
-        a.addEventListener('click', (e)=>{
-          const title = e.currentTarget.getAttribute('data-title');
-          incrementClick(title);
-          renderTopPicks(); renderGrid();
-        }, { passive: true });
-      });
-    }
-
-    // ----- Initial render -----
-    document.getElementById('avatar').src = 'Headshot cropped.jpg';
-    document.getElementById('resumeLink').href = RESUME_PATH;
-    document.getElementById('contactBtn').addEventListener('click', ()=>{ location.href='mailto:parthghosh97@gmail.com?subject=Let%27s%20build%20something%20cool'; });
-
-    function init(){ renderFilters(); renderTopPicks(); renderGrid(); }
-    init();
   </script>
 </body>
 </html>
