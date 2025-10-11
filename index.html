@@ -1,136 +1,187 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Parth Ghosh • Portfolio</title>
-  <meta name="description" content="Parth Ghosh — Business Analytics portfolio. Predictive modeling, dashboards, marketing analytics." />
 
-  <!-- SOCIAL PREVIEWS -->
+  <meta name="description" content="Parth Ghosh — Business Analytics portfolio. Predictive modeling, dashboards, marketing analytics." />
   <meta property="og:title" content="Parth Ghosh • Business Analytics Portfolio">
   <meta property="og:description" content="Predictive modeling, dashboards, and marketing analytics. Clear, outcome-focused work in Python, SQL, Power BI, and Tableau.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://parthghosh97-coder.github.io/">
   <meta name="twitter:card" content="summary">
 
-  <!-- THEME COLORS (fixed) -->
   <style>
+    /* THEME VARIABLES */
     :root {
-      --bg:#ffffff; --text:#111111; --muted:#505050;
-      --panel:#ffffff; --border:#e5e5e5;
+      --bg:#ffffff; --text:#111111; --panel:#ffffff; --border:#e5e5e5;
       --btn-bg:transparent; --btn-text:#111111; --btn-border:#111111;
       --link:#111111;
-      --chip-bg:#f6f6f6; --chip-text:#111111;
     }
     :root[data-theme="dark"] {
-      --bg:#0b0c10; --text:#f2f2f2; --muted:#b6b6b6;
-      --panel:#111214; --border:#1f2226;
+      --bg:#0b0b0b; --text:#f2f2f2; --panel:#121212; --border:#1e1e1e;
       --btn-bg:transparent; --btn-text:#f2f2f2; --btn-border:#f2f2f2;
       --link:#f2f2f2;
-      --chip-bg:#1a1d22; --chip-text:#e7e7e7;
     }
 
-    /* base structure */
-    html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,Segoe UI,Arial,sans-serif}
-    a{color:var(--link);text-decoration:none;transition:opacity .2s ease}
-    a:hover{opacity:.9}
-
-    .wrap{max-width:1000px;margin:0 auto;padding:20px}
-    .topbar{display:flex;justify-content:flex-end;gap:16px;align-items:center;padding:10px 0}
-    .topbar a{font-size:14px}
-
-    /* universal buttons */
-    .btn,button{
-      display:inline-block;padding:10px 14px;
-      background:var(--btn-bg);color:var(--btn-text);
-      border:1px solid var(--btn-border);border-radius:10px;
-      font-size:14px;cursor:pointer;transition:all .2s ease;
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      font-family: system-ui, Arial, sans-serif;
     }
-    .btn:hover,button:hover{background:var(--btn-text);color:var(--bg);border-color:var(--btn-text)}
 
-    /* header & sections */
-    .title{font-size:28px;font-weight:700;margin:8px 0;color:var(--text)}
-    .h1{font-size:22px;margin:10px 0 8px}
-    .lead{max-width:75ch;line-height:1.6;color:var(--text)}
-    .open-to{margin:6px 0 14px;color:var(--muted);font-size:15px}
-    .chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 18px}
-    .chip{padding:6px 10px;border:1px solid var(--border);border-radius:999px;background:var(--chip-bg);color:var(--chip-text);font-size:12px}
-    h2{font-size:20px;margin:28px 0 12px;color:var(--text)}
-    .foot{margin-top:28px;padding:16px 0;border-top:1px solid var(--border);color:var(--muted);font-size:14px}
-    .tip{margin-top:8px;font-size:13px;color:var(--muted)}
+    a { color: var(--link); text-decoration: none; }
+    a:hover { opacity: 0.8; }
+
+    nav {
+      display: flex; justify-content: flex-end; gap: 16px; padding: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 16px;
+      border: 1px solid var(--btn-border);
+      color: var(--btn-text);
+      background: var(--btn-bg);
+      border-radius: 10px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .btn:hover {
+      background: var(--btn-text);
+      color: var(--bg);
+    }
+
+    header { text-align: center; padding: 40px 20px 20px; }
+    .site-title { font-size: 32px; font-weight: 700; margin: 10px 0; color: var(--text); }
+    .tagline { font-size: 16px; max-width: 600px; margin: 0 auto; line-height: 1.6; color: var(--text); }
+
+    .theme-toggle {
+      position: fixed; top: 15px; right: 15px;
+      border-radius: 50%; border: 1px solid var(--btn-border);
+      background: var(--bg); color: var(--btn-text);
+      width: 38px; height: 38px; font-size: 16px; cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .theme-toggle:hover { background: var(--btn-text); color: var(--bg); }
+
+    section { max-width: 1000px; margin: 0 auto; padding: 20px; }
+    .grid {
+      display: grid; gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--panel);
+      padding: 16px;
+      transition: 0.3s ease;
+    }
+    .card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.08); transform: translateY(-2px); }
+    .card h3 { margin-top: 0; }
+
+    footer {
+      text-align: center; padding: 20px;
+      font-size: 14px; color: var(--text);
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <!-- top nav -->
-    <div class="topbar">
-      <a href="#projects">Projects</a>
-      <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
-      <a href="https://github.com/parthghosh97-coder" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://www.linkedin.com/in/parth-ghosh-736669226" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="#contact">Contact</a>
-      <button class="btn" id="vibeBtn" onclick="toggleTheme()">Vibe Switch</button>
-    </div>
+  <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
 
-    <!-- header -->
-    <div class="title">Parth Ghosh</div>
-    <div class="h1">Business Analytics that ships decisions.</div>
-    <p class="lead">
-      I am Parth Ghosh, a Business Analytics professional focused on turning raw data into clear, revenue-linked actions through predictive modeling, visualization, and storytelling. Experienced in marketing analytics, forecasting, and sustainability using Python, SQL, Power BI, and Tableau.
+  <nav>
+    <a href="#projects">Projects</a>
+    <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+    <a href="https://github.com/parthghosh97-coder" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/parth-ghosh-736669226" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <header>
+    <div class="site-title">Parth Ghosh</div>
+    <p class="tagline">
+      I am Parth Ghosh, a Business Analytics & Marketing Analytics professional skilled in predictive modeling, dashboards,
+      and data-driven storytelling using Python, Power BI, Tableau, and SPSS.
     </p>
-    <div class="open-to">Open to: Data Analyst · Marketing Analytics · BI — US remote/hybrid</div>
-    <div class="chips">
-      <span class="chip">Python</span><span class="chip">SQL</span><span class="chip">Power BI</span>
-      <span class="chip">Tableau</span><span class="chip">Marketing Analytics</span><span class="chip">Forecasting</span>
+  </header>
+
+  <section id="projects">
+    <h2>Featured Projects</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Expedia Global Expansion Strategy</h3>
+        <p>Forecasted $381.6M revenue uplift using predictive modeling and stopover program design.</p>
+        <a class="btn" href="projects/Expedia_Global_Expansion/Expedia_Stopover_Program.pdf" target="_blank" rel="noopener">View Report</a>
+      </div>
+
+      <div class="card">
+        <h3>Reddit UGC Dashboard</h3>
+        <p>Power BI dashboard visualizing engagement trends and sentiment across Reddit discussions.</p>
+        <a class="btn" href="projects/Reddit_Dashboard/reddit_dashboard.pbix" target="_blank" rel="noopener">Download PBIX</a>
+      </div>
+
+      <div class="card">
+        <h3>Ancestry Sales Strategy</h3>
+        <p>Sales and BI strategy analysis using CRM systems, AI forecasting, and customer value modeling.</p>
+        <a class="btn" href="projects/Ancestry_Sales_Strategy/Ancestry_Sales_Strategy_Report_Final_Polished.docx" target="_blank" rel="noopener">View Report</a>
+      </div>
+
+      <div class="card">
+        <h3>Airbnb Listing Text Analysis</h3>
+        <p>Text mining and sentiment analysis to find price and occupancy drivers using R and MongoDB.</p>
+        <a class="btn" href="projects/Airbnb_Text_Analysis/Airbnb_Listing_Text_Analysis_FINAL.pdf" target="_blank" rel="noopener">View Report</a>
+      </div>
+
+      <div class="card">
+        <h3>Facebook Live Engagement Clustering</h3>
+        <p>PCA + K-Means + logistic model to predict high-engagement content.</p>
+        <a class="btn" href="projects/Facebook_Live_Clustering/Facebook_Live_Clustering_FINAL.pdf" target="_blank" rel="noopener">View Report</a>
+      </div>
+
+      <div class="card">
+        <h3>Shiva Tourist Dhaba Loyalty Analysis</h3>
+        <p>SPSS discriminant analysis to identify loyalty drivers and positioning.</p>
+        <a class="btn" href="projects/Shiva_Tourist_Dhaba/Shiva_Tourist_Dhaba_Report_Final_100.pdf" target="_blank" rel="noopener">View Report</a>
+      </div>
+
+      <div class="card">
+        <h3>Pillsbury Cookie Challenge</h3>
+        <p>Consumer segmentation and emotional branding strategy through U&amp;A study insights.</p>
+        <a class="btn" href="projects/Pillsbury_Cookie_Challenge/Pillsbury_Assignment_Final_Updated.docx" target="_blank" rel="noopener">View Report</a>
+      </div>
     </div>
+  </section>
 
-    <!-- sections remain the same -->
-    <h2 id="projects">Projects</h2>
-    <p>… your existing project cards or embeds stay exactly here …</p>
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:parthghosh97@gmail.com">parthghosh97@gmail.com</a></p>
+  </section>
 
-    <h2 id="contact">Contact</h2>
-    <p><a class="btn" href="mailto:parthghosh97@gmail.com">Email Me</a></p>
+  <footer>© 2025 Parth Ghosh — Business Analytics Portfolio</footer>
 
-    <div class="foot">
-      <div>Built by Parth Ghosh. Theme saved on your device.</div>
-      <div>Currently vibing to: <span id="vibeNow">Loading...</span></div>
-      <div class="tip">Confetti tip: press V on desktop, double-tap Vibe Switch, or long-press “Currently vibing to”. ✕</div>
-    </div>
-  </div>
-
-  <!-- theme script -->
   <script>
     (function(){
       const saved = localStorage.getItem('theme');
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       const theme = saved || (prefersDark ? 'dark' : 'light');
       document.documentElement.setAttribute('data-theme', theme);
+      document.querySelector('.theme-toggle').textContent = theme === 'dark' ? '🌙' : '☀️';
     })();
 
     function toggleTheme(){
       const root = document.documentElement;
+      const btn = document.querySelector('.theme-toggle');
       const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       root.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
+      btn.textContent = next === 'dark' ? '🌙' : '☀️';
     }
-
-    // random “currently vibing to” line
-    (function(){
-      const el = document.getElementById('vibeNow');
-      if(!el) return;
-      const tracks = ["Badli Si Hawa Hai","HI-LO b2b Oliver Heldens","Lofi focus","Kendrick deep cuts","Travis studio vibes"];
-      el.textContent = tracks[Math.floor(Math.random()*tracks.length)];
-    })();
-
-    // simple confetti tip visual
-    document.addEventListener('keydown', e=>{
-      if(e.key.toLowerCase()==='v'){
-        const tip=document.querySelector('.tip');
-        tip.textContent="✨ Confetti mode toggled!";
-        setTimeout(()=>tip.textContent="Confetti tip: press V on desktop, double-tap Vibe Switch, or long-press “Currently vibing to”. ✕",1200);
-      }
-    });
   </script>
 </body>
 </html>
