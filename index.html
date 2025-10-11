@@ -19,6 +19,7 @@
       --btn-bg:transparent; --btn-text:#111111; --btn-border:#111111;
       --chip-bg:#f6f6f6; --chip-text:#111111;
       --shadow:0 8px 28px rgba(0,0,0,.08); --radius:16px; --accent:#2b72ff;
+      --cursor: var(--text);
     }
     :root[data-theme="dark"]{
       --bg:#0b0b0b; --text:#f2f2f2; --muted:#b9b9b9;
@@ -26,6 +27,7 @@
       --btn-bg:transparent; --btn-text:#f2f2f2; --btn-border:#f2f2f2;
       --chip-bg:#1a1d22; --chip-text:#e7e7e7;
       --shadow:0 10px 32px rgba(0,0,0,.38); --accent:#7aa2ff;
+      --cursor:#f2f2f2;
     }
 
     *{box-sizing:border-box}
@@ -38,8 +40,14 @@
     .section{padding:34px 0}
     h2{font-size:24px;margin:0 0 14px}
 
+    /* Progress bar */
+    #progress{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:60}
+
+    /* Nav */
     nav{position:sticky;top:0;background:var(--bg);z-index:50;border-bottom:1px solid var(--border)}
     .navin{display:flex;justify-content:flex-end;gap:16px;align-items:center;padding:10px 0}
+    .navin a.active{ text-decoration:underline }
+
     .btn{padding:10px 14px;border:1px solid var(--btn-border);
       color:var(--btn-text);background:var(--btn-bg);border-radius:10px;
       font-size:14px;cursor:pointer;transition:all .25s}
@@ -54,6 +62,7 @@
     .theme-toggle:hover{background:var(--btn-text);color:var(--bg)}
     #topBtn{position:fixed;right:16px;bottom:76px;display:none}
 
+    /* Hero */
     header{padding:24px 0 0}
     .hero{display:grid;grid-template-columns:110px 1fr;gap:18px;align-items:center}
     .avatar{width:110px;height:110px;border-radius:999px;border:1px solid var(--border);
@@ -66,6 +75,16 @@
     .chip{padding:6px 10px;border:1px solid var(--border);border-radius:999px;
       background:var(--chip-bg);color:var(--chip-text);font-size:12px}
 
+    /* Typing quotes */
+    .quote-wrap{margin-top:10px;min-height:28px;color:var(--muted);font-size:15px}
+    .quote-line{display:inline}
+    .caret{
+      display:inline-block;width:10px;margin-left:2px;border-left:2px solid var(--cursor);
+      animation:blink 1s steps(1) infinite;vertical-align:-3px;height:1.1em;
+    }
+    @keyframes blink{50%{opacity:0}}
+
+    /* Grid & cards */
     .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
     .card{border:1px solid var(--border);border-radius:var(--radius);
       background:var(--panel);padding:16px;transition:transform .25s,box-shadow .25s,opacity .6s;
@@ -75,23 +94,46 @@
     .card .actions{display:flex;gap:10px;flex-wrap:wrap}
     .card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
     .reveal{opacity:1;transform:translateY(0)}
+
+    /* Filters & search */
     .filters{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px}
     .filter{padding:6px 10px;border-radius:999px;border:1px solid var(--border);
       cursor:pointer;font-size:12px}
     .filter.active{border-color:var(--accent);color:var(--accent)}
+    #projectSearch{width:100%;margin-bottom:10px}
 
+    /* Details drawer */
+    .details{display:none;margin-top:8px;font-size:14px;opacity:.95}
+    .details ul{margin:0;padding-left:18px}
+
+    /* Footer & confetti */
     footer{text-align:center;padding:20px 0;border-top:1px solid var(--border);
       font-size:14px;margin-top:24px}
     .tip{margin-top:8px;font-size:13px;opacity:.85}
     #confetti{position:fixed;inset:0;pointer-events:none;z-index:9999;display:none}
+
+    /* PDF Modal */
+    #pdfModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999}
+    #pdfBox{max-width:1100px;height:82vh;margin:40px auto;background:var(--panel);
+      border-radius:16px;overflow:hidden;border:1px solid var(--border)}
+    #pdfHead{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid var(--border)}
+    #pdfFrame{width:100%;height:calc(82vh - 50px);border:0}
+
     @media (max-width:640px){.hero{grid-template-columns:84px 1fr}.avatar{width:84px;height:84px}}
   </style>
 </head>
 <body>
+  <!-- Progress bar -->
+  <div id="progress"></div>
+
+  <!-- Confetti canvas -->
   <canvas id="confetti"></canvas>
+
+  <!-- Floating controls -->
   <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">☀️</button>
   <button id="topBtn" class="btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">Top ↑</button>
 
+  <!-- Nav -->
   <nav>
     <div class="wrap navin">
       <a href="#about">About</a>
@@ -104,6 +146,7 @@
   </nav>
 
   <div class="wrap">
+    <!-- ABOUT -->
     <header id="about" class="section">
       <div class="hero">
         <img class="avatar" src="Headshot%20cropped.jpg" alt="Parth Ghosh" />
@@ -115,6 +158,11 @@
             product, marketing, and revenue. Toolkit: Python, R, SQL, Power BI,
             Tableau, SPSS — and the judgment to ship what actually moves the metric.
           </p>
+          <!-- live typing quotes -->
+          <div class="quote-wrap" aria-live="polite">
+            <span class="quote-line" id="quoteLine"></span><span class="caret"></span>
+          </div>
+
           <div class="open-to">
             Open to roles: <b>Data Analyst</b>, <b>Marketing Analyst</b>, <b>Business Analyst</b>,
             <b>Business Intelligence</b> (US — remote or hybrid)
@@ -136,6 +184,7 @@
       </div>
     </header>
 
+    <!-- IMPACT -->
     <section class="section">
       <h2>Selected Impact</h2>
       <div class="grid">
@@ -145,8 +194,14 @@
       </div>
     </section>
 
+    <!-- PROJECTS -->
     <section id="projects" class="section">
       <h2>Featured Projects</h2>
+
+      <!-- Project search (instant) -->
+      <input id="projectSearch" class="btn" placeholder="Search projects…" aria-label="Search projects" />
+
+      <!-- Filters -->
       <div class="filters">
         <button class="filter active" data-tag="all">All</button>
         <button class="filter" data-tag="strategy">Strategy</button>
@@ -157,81 +212,137 @@
       </div>
 
       <div class="grid" id="projectGrid">
+        <!-- Use class 'open-pdf' to open inline in modal -->
         <article class="card" data-tags="strategy marketing">
           <h3>Expedia Stop Over Program</h3>
           <p>Business case + forecast; growth roadmap and modeling.</p>
           <div class="actions">
-            <a class="btn" href="Expedia%20Stop%20Over%20Program.pdf" target="_blank">View Report</a>
+            <a class="btn open-pdf" data-title="Expedia Stop Over Program" href="Expedia%20Stop%20Over%20Program.pdf">View Report</a>
           </div>
+          <button class="btn details-btn" type="button">Details ▾</button>
+          <div class="details"><ul>
+            <li>Role: Lead Analyst</li>
+            <li>Stack: Excel, Forecasting, Strategy</li>
+            <li>Outcome: Clear roadmap & growth scenarios</li>
+          </ul></div>
         </article>
 
         <article class="card" data-tags="nlp marketing">
           <h3>Airbnb Text &amp; Data Analysis</h3>
           <p>NLP + data exploration on listing text explaining price and engagement.</p>
           <div class="actions">
-            <a class="btn" href="Airbnb%20Text%20and%20Data%20Analysis%20Report.pdf" target="_blank">View Report</a>
+            <a class="btn open-pdf" data-title="Airbnb Report" href="Airbnb%20Text%20and%20Data%20Analysis%20Report.pdf">View Report</a>
             <a class="btn" href="airbnb%20anlysis%20and%20dashboard%20tableau.twb" target="_blank">Download TWB</a>
           </div>
+          <button class="btn details-btn" type="button">Details ▾</button>
+          <div class="details"><ul>
+            <li>Role: Data Analyst</li>
+            <li>Stack: Python (NLP), Tableau</li>
+            <li>Outcome: Features explaining engagement & price</li>
+          </ul></div>
         </article>
 
         <article class="card" data-tags="marketing strategy">
           <h3>Air France Analysis</h3>
           <p>Campaign performance + media optimization recommendations.</p>
           <div class="actions">
-            <a class="btn" href="Air%20France%20analysis.pdf" target="_blank">View Report</a>
+            <a class="btn open-pdf" data-title="Air France Analysis" href="Air%20France%20analysis.pdf">View Report</a>
           </div>
+          <button class="btn details-btn" type="button">Details ▾</button>
+          <div class="details"><ul>
+            <li>Role: Marketing Analyst</li>
+            <li>Stack: Excel, Statistics</li>
+            <li>Outcome: Budget reallocation with ROI lift</li>
+          </ul></div>
         </article>
 
         <article class="card" data-tags="dashboard bi">
           <h3>US Sales Dashboard Insights (2017)</h3>
           <p>Sales KPI trends summarized for executives.</p>
           <div class="actions">
-            <a class="btn" href="US%20Sales%20Dashboard%20Insights%202017.pdf" target="_blank">View PDF</a>
+            <a class="btn open-pdf" data-title="US Sales Dashboard Insights (2017)" href="US%20Sales%20Dashboard%20Insights%202017.pdf">View PDF</a>
           </div>
+          <button class="btn details-btn" type="button">Details ▾</button>
+          <div class="details"><ul>
+            <li>Role: BI Developer</li>
+            <li>Stack: Power BI</li>
+            <li>Outcome: Faster KPI reviews</li>
+          </ul></div>
         </article>
 
         <article class="card" data-tags="dashboard bi">
           <h3>Reddit UGC Dashboard (Power BI)</h3>
           <p>Analysis of San Francisco Reddit threads revealing local trends and marketing insights.</p>
           <div class="actions">
-            <a class="btn" href="User-generated%20content%20analysis%20power%20bi%20dashboard%20.pdf" target="_blank">View Report</a>
+            <a class="btn open-pdf" data-title="Reddit UGC Dashboard (Power BI)" href="User-generated%20content%20analysis%20power%20bi%20dashboard%20.pdf">View Report</a>
           </div>
+          <button class="btn details-btn" type="button">Details ▾</button>
+          <div class="details"><ul>
+            <li>Role: BI Analyst</li>
+            <li>Stack: Power BI</li>
+            <li>Outcome: Insights for tourism & local brands</li>
+          </ul></div>
         </article>
 
         <article class="card" data-tags="marketing strategy">
           <h3>Pillsbury Cookie Challenge</h3>
           <p>Consumer segmentation and brand positioning with clear actions.</p>
           <div class="actions">
-            <a class="btn" href="pillsbury%20cookie%20challenge%20.pdf" target="_blank">View Report</a>
+            <a class="btn open-pdf" data-title="Pillsbury Cookie Challenge" href="pillsbury%20cookie%20challenge%20.pdf">View Report</a>
           </div>
+          <button class="btn details-btn" type="button">Details ▾</button>
+          <div class="details"><ul>
+            <li>Role: Marketing Analyst</li>
+            <li>Stack: Segmentation, Positioning</li>
+            <li>Outcome: Differentiated brand strategy</li>
+          </ul></div>
         </article>
 
         <article class="card" data-tags="statistics marketing">
           <h3>Shiva Tourist Dhaba</h3>
           <p>SPSS discriminant analysis — loyalty drivers and recommendations.</p>
           <div class="actions">
-            <a class="btn" href="shiva%20tourist%20dhaba%20.pdf" target="_blank">View Report</a>
+            <a class="btn open-pdf" data-title="Shiva Tourist Dhaba" href="shiva%20tourist%20dhaba%20.pdf">View Report</a>
           </div>
+          <button class="btn details-btn" type="button">Details ▾</button>
+          <div class="details"><ul>
+            <li>Role: Analyst</li>
+            <li>Stack: SPSS</li>
+            <li>Outcome: Loyalty drivers & retention actions</li>
+          </ul></div>
         </article>
 
         <article class="card" data-tags="bi strategy">
           <h3>Business Challenge</h3>
           <p>Predictive modeling case write-up.</p>
           <div class="actions">
-            <a class="btn" href="business%20challenge%203%20.pdf" target="_blank">View PDF</a>
+            <a class="btn open-pdf" data-title="Business Challenge" href="business%20challenge%203%20.pdf">View PDF</a>
           </div>
+          <button class="btn details-btn" type="button">Details ▾</button>
+          <div class="details"><ul>
+            <li>Role: Data Scientist</li>
+            <li>Stack: Python, Modeling</li>
+            <li>Outcome: Interpretable predictions & recommendations</li>
+          </ul></div>
         </article>
 
         <article class="card" data-tags="bi">
           <h3>Dataiku ML Sample (Car Images)</h3>
           <p>Machine learning sample workflow and documentation.</p>
           <div class="actions">
-            <a class="btn" href="Dataiku%20Machine%20Learning%20Sample%20for%20Car%20Images%20Classification%20to%20produce%20automobiles%20.pdf" target="_blank">View PDF</a>
+            <a class="btn open-pdf" data-title="Dataiku ML Sample (Car Images)" href="Dataiku%20Machine%20Learning%20Sample%20for%20Car%20Images%20Classification%20to%20produce%20automobiles%20.pdf">View PDF</a>
           </div>
+          <button class="btn details-btn" type="button">Details ▾</button>
+          <div class="details"><ul>
+            <li>Role: ML Practitioner</li>
+            <li>Stack: Dataiku</li>
+            <li>Outcome: Documented ML workflow</li>
+          </ul></div>
         </article>
       </div>
     </section>
 
+    <!-- EXTRAS -->
     <section id="extras" class="section">
       <h2>Extras</h2>
       <div class="grid">
@@ -241,20 +352,43 @@
       </div>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact" class="section">
       <h2>Contact</h2>
-      <p><a class="btn btn-accent" href="mailto:parthghosh97@gmail.com">Email Me</a></p>
+      <p>
+        <a class="btn btn-accent" href="mailto:parthghosh97@gmail.com">Email Me</a>
+      </p>
+      <p style="margin-top:10px">
+        <button class="btn" id="copyEmail">Copy Email</button>
+        <button class="btn" id="copyLinkedIn">Copy LinkedIn</button>
+      </p>
     </section>
 
     <footer>
       <div>Built by Parth Ghosh. Theme saved on your device.</div>
       <div>Currently vibing to: <span id="vibeNow">Loading</span></div>
-      <div class="tip">Confetti: press <b>V</b>, double-tap Vibe Switch, or long-press the vibing line.</div>
+      <div class="tip">Confetti: press <b>V</b>, double-click Vibe Switch, or long-press the vibing line.</div>
     </footer>
   </div>
 
+  <!-- PDF Modal -->
+  <div id="pdfModal" role="dialog" aria-modal="true" aria-label="Document preview">
+    <div id="pdfBox">
+      <div id="pdfHead">
+        <strong id="pdfTitle" style="font-size:14px"></strong>
+        <div style="display:flex;gap:8px;align-items:center">
+          <a class="btn" id="pdfOpenNew" href="#" target="_blank" rel="noopener">Open in new tab ↗</a>
+          <button class="btn" id="pdfClose">Close ✕</button>
+        </div>
+      </div>
+      <iframe id="pdfFrame" title="Preview" loading="lazy"></iframe>
+    </div>
+  </div>
+
   <script>
-    // Theme init
+    /* =========================
+       Theme init & Vibe Switch
+       ========================= */
     (function(){
       const saved = localStorage.getItem('theme');
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -271,17 +405,30 @@
       localStorage.setItem('theme', next);
       if(icon) icon.textContent = next === 'dark' ? '🌙' : '☀️';
     }
-
-    // Reveal on scroll
+    // Vibe Switch: click toggles theme, double-click confetti
     (function(){
+      const vibe = document.getElementById('vibeBtn');
+      if(!vibe) return;
+      vibe.addEventListener('click', toggleTheme);
+      vibe.addEventListener('dblclick', ()=>{ if (window.Confetti?.start) Confetti.start(); });
+    })();
+
+    /* =========================
+       Reveal on scroll (prefers-reduced-motion respected)
+       ========================= */
+    (function(){
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const cards = document.querySelectorAll('.card');
+      if (prefersReduced) { cards.forEach(c=>c.classList.add('reveal')); return; }
       const io = new IntersectionObserver((entries)=>{
         entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('reveal'); io.unobserve(e.target);} });
       }, {threshold:0.1, rootMargin:"0px 0px -10% 0px"});
       cards.forEach(c=>io.observe(c));
     })();
 
-    // Filters
+    /* =========================
+       Filters
+       ========================= */
     (function(){
       const filters = document.querySelectorAll('.filter');
       const cards = [...document.querySelectorAll('#projectGrid .card')];
@@ -298,7 +445,86 @@
       });
     })();
 
-    // Vibe line
+    /* =========================
+       Project search (instant)
+       ========================= */
+    (function(){
+      const box = document.getElementById('projectSearch');
+      if(!box) return;
+      const cards = [...document.querySelectorAll('#projectGrid .card')];
+      box.addEventListener('input', ()=>{
+        const q = box.value.trim().toLowerCase();
+        cards.forEach(c=>{
+          const txt = (c.innerText || '').toLowerCase();
+          c.style.display = txt.includes(q) ? '' : 'none';
+        });
+      });
+    })();
+
+    /* =========================
+       Details drawers
+       ========================= */
+    document.addEventListener('click', (e)=>{
+      const btn = e.target.closest('.details-btn'); if(!btn) return;
+      const box = btn.parentElement.querySelector('.details');
+      const open = box.style.display !== 'none';
+      box.style.display = open ? 'none' : '';
+      btn.textContent = open ? 'Details ▾' : 'Details ▴';
+    });
+
+    /* =========================
+       PDF Modal Preview
+       ========================= */
+    (function(){
+      const M = document.getElementById('pdfModal'),
+            F = document.getElementById('pdfFrame'),
+            T = document.getElementById('pdfTitle'),
+            C = document.getElementById('pdfClose'),
+            OPEN = document.getElementById('pdfOpenNew');
+      if(!M) return;
+
+      // open in modal
+      document.addEventListener('click', e=>{
+        const a = e.target.closest('a.open-pdf'); if(!a) return;
+        e.preventDefault();
+        const href = a.getAttribute('href');
+        const title = a.dataset.title || 'Preview';
+        T.textContent = title;
+        F.src = href;
+        OPEN.href = href;
+        M.style.display = 'block';
+        document.body.style.overflow='hidden';
+      });
+
+      // close modal
+      const close = ()=>{ M.style.display='none'; F.src='about:blank'; document.body.style.overflow=''; };
+      C.addEventListener('click', close);
+      M.addEventListener('click', (e)=>{ if(e.target===M) close(); });
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && M.style.display==='block') close(); });
+    })();
+
+    /* =========================
+       Progress bar + active section highlight
+       ========================= */
+    (function(){
+      const bar = document.getElementById('progress');
+      const links = [...document.querySelectorAll('nav a[href^="#"]')];
+      const secs = links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+      const onScroll = ()=>{
+        const h = document.documentElement;
+        const p = (h.scrollTop)/(h.scrollHeight - h.clientHeight);
+        bar.style.width = (p*100)+'%';
+        // Active highlight
+        let active = null, y = scrollY + innerHeight*0.35;
+        secs.forEach((s,i)=>{ if(s.offsetTop <= y) active = links[i]; });
+        links.forEach(l=>l.classList.toggle('active', l===active));
+      };
+      addEventListener('scroll', onScroll, {passive:true}); onScroll();
+    })();
+
+    /* =========================
+       Vibe line (random track)
+       ========================= */
     (function(){
       const el = document.getElementById('vibeNow');
       if(!el) return;
@@ -312,7 +538,9 @@
       el.textContent = tracks[Math.floor(Math.random()*tracks.length)];
     })();
 
-    // Confetti
+    /* =========================
+       Confetti
+       ========================= */
     const Confetti = (function(){
       let canvas, ctx, w, h, pieces = [], running = false, rafId;
       function rnd(a,b){ return Math.random()*(b-a)+a; }
@@ -342,33 +570,71 @@
     })();
     Confetti.init();
     document.addEventListener('keydown', e=>{ if(e.key && e.key.toLowerCase()==='v') Confetti.start(); });
-    (function(){
-      const btn = document.getElementById('vibeBtn');
-      if(btn){
-        let last = 0;
-        btn.addEventListener('click', ()=>{
-          const now = Date.now();
-          if(now - last < 350) Confetti.start();
-          last = now;
-        });
-      }
-      const line = document.getElementById('vibeNow');
-      if(line){
-        let t;
-        const on = ()=>{ t=setTimeout(()=>Confetti.start(), 550); };
-        const off = ()=>{ clearTimeout(t); };
-        line.addEventListener('mousedown', on); line.addEventListener('mouseup', off); line.addEventListener('mouseleave', off);
-        line.addEventListener('touchstart', on, {passive:true}); line.addEventListener('touchend', off);
-      }
-    })();
 
-    // Back to top visibility
+    /* =========================
+       Back to top visibility
+       ========================= */
     (function(){
       const b = document.getElementById('topBtn');
       const s = ()=>{ b.style.display = scrollY > 600 ? 'block' : 'none'; };
       addEventListener('scroll', s, {passive:true});
       s();
     })();
+
+    /* =========================
+       Live typing quotes (business analytics)
+       ========================= */
+    (function(){
+      const el = document.getElementById('quoteLine');
+      if(!el) return;
+      const quotes = [
+        "“Without data, you’re just another person with an opinion.” — W. Edwards Deming",
+        "“In God we trust; all others must bring data.” — W. Edwards Deming",
+        "“What gets measured gets managed.” — Peter Drucker",
+        "“The goal is to turn data into information, and information into insight.” — Carly Fiorina",
+        "“Numbers have an important story to tell.” — Stephen Few"
+      ];
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let i = 0, idx = 0, typing = true;
+      const TYPE = 28, DELETE = 18, PAUSE = 1200;
+
+      function loop(){
+        const q = quotes[i];
+        if (prefersReduced){ el.textContent = q; i = (i+1)%quotes.length; return setTimeout(loop, 2000); }
+        if (typing){
+          el.textContent = q.slice(0, idx++);
+          if (idx > q.length){ typing = false; return setTimeout(loop, PAUSE); }
+          return setTimeout(loop, TYPE);
+        } else {
+          el.textContent = q.slice(0, idx--);
+          if (idx < 0){ typing = true; i = (i+1)%quotes.length; return setTimeout(loop, 200); }
+          return setTimeout(loop, DELETE);
+        }
+      }
+      loop();
+    })();
+
+    /* =========================
+       Copy to clipboard buttons
+       ========================= */
+    document.getElementById('copyEmail')?.addEventListener('click', async ()=>{
+      try{ await navigator.clipboard.writeText('parthghosh97@gmail.com'); alert('Email copied!'); }catch{}
+    });
+    document.getElementById('copyLinkedIn')?.addEventListener('click', async ()=>{
+      try{ await navigator.clipboard.writeText('https://www.linkedin.com/in/parth-ghosh-736669226'); alert('LinkedIn URL copied!'); }catch{}
+    });
+
+    /* =========================
+       Sync floating theme icon to system if no manual choice
+       ========================= */
+    matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e=>{
+      const saved = localStorage.getItem('theme');
+      if (!saved) {
+        document.documentElement.setAttribute('data-theme', e.matches?'dark':'light');
+        const icon=document.getElementById('themeToggle');
+        if(icon) icon.textContent=e.matches?'🌙':'☀️';
+      }
+    });
   </script>
 </body>
 </html>
