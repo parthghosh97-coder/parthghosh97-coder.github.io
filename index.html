@@ -69,41 +69,15 @@
     .chip{padding:6px 10px;border:1px solid var(--border);border-radius:999px;
       background:var(--chip-bg);color:var(--chip-text);font-size:12px}
 
-    .quote-wrap{margin-top:10px;min-height:28px;color:var(--muted);font-size:15px}
-    .quote-line{display:inline}
-    .caret{display:inline-block;width:10px;margin-left:2px;border-left:2px solid var(--cursor);
-      animation:blink 1s steps(1) infinite;vertical-align:-3px;height:1.1em}
-    @keyframes blink{50%{opacity:0}}
-
     .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
     .card{border:1px solid var(--border);border-radius:var(--radius);
       background:var(--panel);padding:16px;transition:transform .25s,box-shadow .25s,opacity .6s;
       opacity:0;transform:translateY(16px)}
-    .card h3{margin:6px 0 8px;font-size:18px}
-    .card p{margin:0 0 12px;line-height:1.45}
-    .card .actions{display:flex;gap:10px;flex-wrap:wrap}
     .card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
     .reveal{opacity:1;transform:translateY(0)}
-
-    .filters{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px}
-    .filter{padding:6px 10px;border-radius:999px;border:1px solid var(--border);
-      cursor:pointer;font-size:12px}
-    .filter.active{border-color:var(--accent);color:var(--accent)}
-    #projectSearch{width:100%;margin-bottom:10px}
-
-    footer{text-align:center;padding:20px 0;border-top:1px solid var(--border);
-      font-size:14px;margin-top:24px}
-    .tip{margin-top:8px;font-size:13px;opacity:.85}
-    #confetti{position:fixed;inset:0;pointer-events:none;z-index:9999;display:none}
-
-    #pdfModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999}
-    #pdfBox{max-width:1100px;height:82vh;margin:40px auto;background:var(--panel);
-      border-radius:16px;overflow:hidden;border:1px solid var(--border)}
-    #pdfHead{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid var(--border)}
-    #pdfFrame{width:100%;height:calc(82vh - 50px);border:0}
-    @media (max-width:640px){.hero{grid-template-columns:84px 1fr}.avatar{width:84px;height:84px}}
   </style>
 </head>
+
 <body>
   <div id="progress"></div>
   <canvas id="confetti"></canvas>
@@ -127,117 +101,122 @@
         <img class="avatar" src="Headshot%20cropped.jpg" alt="Parth Ghosh" />
         <div>
           <div class="site-title">Parth Ghosh</div>
-          <p class="tagline">I am a Business Analytics professional who turns data into decisions. I build predictive models, dashboards, and crisp narratives that influence product, marketing, and revenue.</p>
-          <div class="quote-wrap"><span class="quote-line" id="quoteLine"></span><span class="caret"></span></div>
-          <div class="open-to">Open to roles: <b>Data Analyst</b>, <b>Marketing Analyst</b>, <b>Business Analyst</b>, <b>Business Intelligence</b></div>
+          <p class="tagline">
+            I am a Business Analytics professional who turns data into actionable business decisions.
+          </p>
+          <div class="open-to">
+            Open to roles: <b>Data Analyst</b>, <b>Marketing Analyst</b>, <b>Business Analyst</b>, <b>BI Analyst</b>
+          </div>
+
           <div class="cta-row">
             <a class="btn btn-accent" href="resume.pdf" target="_blank">View Resume</a>
             <a class="btn" href="mailto:parthghosh97@gmail.com">Email</a>
             <a class="btn" href="https://www.linkedin.com/in/parth-ghosh-736669226" target="_blank">LinkedIn</a>
             <a class="btn" href="https://github.com/parthghosh97-coder" target="_blank">GitHub</a>
           </div>
+
           <div class="chips">
             <span class="chip">Python</span><span class="chip">R</span><span class="chip">SQL</span>
             <span class="chip">Power BI</span><span class="chip">Tableau</span><span class="chip">SPSS</span>
-            <span class="chip">Google Analytics</span><span class="chip">Statistics</span><span class="chip">Predictive Modeling</span>
-            <span class="chip">Digital Marketing (Customer Acquisition)</span>
+            <span class="chip">Google Analytics</span><span class="chip">Predictive Modeling</span>
           </div>
         </div>
       </div>
     </header>
-
     <!-- PROJECTS SECTION -->
     <section id="projects" class="section">
       <h2>Featured Projects</h2>
       <input id="projectSearch" class="btn" placeholder="Search projects…" />
-      <div class="filters">
-        <button class="filter active" data-tag="all">All</button>
-        <button class="filter" data-tag="strategy">Strategy</button>
-        <button class="filter" data-tag="dashboard">Dashboard</button>
-        <button class="filter" data-tag="nlp">NLP</button>
-        <button class="filter" data-tag="marketing">Marketing</button>
-        <button class="filter" data-tag="bi">BI</button>
-      </div>
 
       <div class="grid" id="projectGrid">
-        <!-- === PROJECT CARDS === -->
 
-        <article class="card reveal" data-tags="strategy marketing">
+        <article class="card reveal">
+          <h3>Air France Paid Search Optimization</h3>
+          <p>Analyzed paid search bid strategies and optimized channel ROI.</p>
+          <div class="actions">
+            <a class="btn btn-accent" href="Air%20France%20analysis.pdf" target="_blank">View Report</a>
+          </div>
+        </article>
+
+        <article class="card reveal">
           <h3>Expedia Stop-Over Program</h3>
-          <p>Forecasted $381.6M in new annual revenue through a global expansion strategy using regression and market-mix modeling.</p>
+          <p>Strategic forecasting of $381.6M revenue expansion using regression modeling.</p>
           <div class="actions">
             <a class="btn btn-accent" href="Expedia%20Stop%20Over%20Program.pdf" target="_blank">View Report</a>
           </div>
         </article>
 
-        <article class="card reveal" data-tags="nlp bi">
+        <article class="card reveal">
           <h3>Airbnb Listing Text Analysis</h3>
-          <p>Performed NLP and sentiment analysis on Airbnb listings to identify how language impacts price and ratings.</p>
+          <p>NLP and sentiment analysis of Airbnb listing descriptions.</p>
           <div class="actions">
-            <!-- Make sure this filename exactly matches the Airbnb text-analysis PDF in the repo -->
             <a class="btn btn-accent" href="Airbnb%20Text%20and%20Data%20Analysis%20Report.pdf" target="_blank">View Report</a>
           </div>
         </article>
 
-        <article class="card reveal" data-tags="bi marketing">
-          <h3>Facebook Live Clustering</h3>
-          <p>Clustered 600+ Facebook Live sessions using PCA and K-Means to reveal engagement drivers and brand performance.</p>
+        <article class="card reveal">
+          <h3>US Sales Dashboard Insights 2017</h3>
+          <p>Interactive BI dashboard revealing national sales patterns.</p>
           <div class="actions">
-            <!-- Upload Facebook_Live_Clustering_FINAL.pdf or change this link to the correct file name -->
-            <a class="btn btn-accent" href="Facebook_Live_Clustering_FINAL.pdf" target="_blank">View Report</a>
+            <a class="btn btn-accent" href="US%20Sales%20Dashboard%20Insights%202017.pdf" target="_blank">View Report</a>
           </div>
         </article>
 
-        <article class="card reveal" data-tags="strategy marketing">
-          <h3>Pillsbury Cookie Challenge</h3>
-          <p>Consumer segmentation and perceptual mapping identifying three profitable cookie segments for Pillsbury’s relaunch.</p>
-          <div class="actions">
-            <a class="btn btn-accent" href="pillsbury%20cookie%20challenge%20.pdf" target="_blank">View Report</a>
-          </div>
-        </article>
-
-        <article class="card reveal" data-tags="dashboard bi marketing">
+        <article class="card reveal">
           <h3>Reddit UGC Dashboard (Power BI)</h3>
-          <p>Analyzed San Francisco Reddit posts to uncover community trends and marketing insights for local brands and tourism.</p>
+          <p>Analyzed user-generated content themes and sentiment.</p>
           <div class="actions">
             <a class="btn btn-accent" href="User-generated%20content%20analysis%20power%20bi%20dashboard%20.pdf" target="_blank">View Report</a>
           </div>
         </article>
 
-        <article class="card reveal" data-tags="dashboard bi">
+        <article class="card reveal">
+          <h3>Airbnb Tableau Dashboard</h3>
+          <p>Full Tableau workbook exploring Airbnb pricing and occupancy.</p>
+          <div class="actions">
+            <a class="btn btn-accent" href="airbnb%20anlysis%20and%20dashboard%20tableau.twb" target="_blank">Open Workbook</a>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <h3>Pillsbury Cookie Challenge</h3>
+          <p>Perceptual maps and consumer segmentation for cookie relaunch.</p>
+          <div class="actions">
+            <a class="btn btn-accent" href="pillsbury%20cookie%20challenge%20.pdf" target="_blank">View Report</a>
+          </div>
+        </article>
+
+        <article class="card reveal">
           <h3>Shiva Tourist Dhaba Loyalty Analysis</h3>
-          <p>SPSS discriminant analysis identifying high-loyalty customer groups and retention strategies for a regional brand.</p>
+          <p>SPSS Discriminant Analysis for loyalty segmentation.</p>
           <div class="actions">
             <a class="btn btn-accent" href="shiva%20tourist%20dhaba%20.pdf" target="_blank">View Report</a>
           </div>
         </article>
 
-        <article class="card reveal" data-tags="strategy bi">
-          <h3>Ancestry Sales Strategy Report</h3>
-          <p>Designed a sales enablement and analytics strategy improving CRM visibility, forecasting accuracy, and campaign ROI.</p>
+        <article class="card reveal">
+          <h3>Business Challenge Three</h3>
+          <p>Data-driven strategic recommendations based on modeling insights.</p>
           <div class="actions">
-            <!-- Upload Ancestry Sales Strategy Report Final Polished.docx or change this link to match the actual file -->
-            <a class="btn btn-accent" href="Ancestry%20Sales%20Strategy%20Report%20Final%20Polished.docx" target="_blank">View Report</a>
+            <a class="btn btn-accent" href="business%20challenge%203%20.pdf" target="_blank">View Report</a>
           </div>
         </article>
 
-        <article class="card reveal" data-tags="machinelearning bi">
-          <h3>Dataiku Machine Learning Sample</h3>
-          <p>Built a car-image classification pipeline in Dataiku using automated labeling, model evaluation, and deployment workflows.</p>
+        <article class="card reveal">
+          <h3>Dataiku Car Image Classification</h3>
+          <p>Machine learning workflow for car image prediction using Dataiku.</p>
           <div class="actions">
             <a class="btn btn-accent" href="Dataiku%20Machine%20Learning%20Sample%20for%20Car%20Images%20Classification%20to%20produce%20automobiles%20.pdf" target="_blank">View Report</a>
           </div>
         </article>
 
-        <!-- === END PROJECT CARDS === -->
       </div>
     </section>
-
     <section id="extras" class="section">
       <h2>Extras</h2>
       <div class="grid">
-        <div class="card reveal"><h3>Tooling</h3><p>Jupyter, scikit-learn, pandas, NumPy, matplotlib, DAX, M, Tableau Prep, SQL, GA.</p></div>
-        <div class="card reveal"><h3>What I optimize for</h3><p>Decision clarity &gt; model novelty. I ship the smallest artifact that unlocks action.</p></div>
+        <div class="card reveal"><h3>Tooling</h3><p>Python, SQL, R, Tableau, Power BI, SPSS, GA4, pandas, sklearn.</p></div>
+        <div class="card reveal"><h3>What I optimize for</h3><p>Insights that drive action. Clear, simple storytelling.</p></div>
       </div>
     </section>
 
@@ -245,26 +224,18 @@
       <h2>Contact</h2>
       <p>
         <a class="btn btn-accent" href="mailto:parthghosh97@gmail.com">Email Me</a>
-        <a class="btn" href="https://www.linkedin.com/in/parth-ghosh-736669226" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://www.linkedin.com/in/parth-ghosh-736669226" target="_blank">LinkedIn</a>
       </p>
     </section>
 
     <footer>
-      <div>Built by Parth Ghosh. Theme saved on your device.</div>
+      <div>Built by Parth Ghosh.</div>
       <div>Currently vibing to: <span id="vibeNow">Loading</span></div>
-      <div class="tip">Confetti: press <b>V</b>, double-click Vibe Switch, or long-press the vibing line.</div>
     </footer>
   </div>
 
-  <div id="pdfModal">
-    <div id="pdfBox">
-      <div id="pdfHead"><strong id="pdfTitle"></strong><button class="btn" id="pdfClose">Close ✕</button></div>
-      <iframe id="pdfFrame"></iframe>
-    </div>
-  </div>
-
 <script>
-/* ===============  THEME INITIALIZATION  =============== */
+/* THEME INITIALIZATION */
 (function(){
   const saved = localStorage.getItem('theme');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -273,6 +244,7 @@
   const icon = document.getElementById('themeToggle');
   if(icon) icon.textContent = theme === 'dark' ? '🌙' : '☀️';
 })();
+
 function toggleTheme(){
   const root = document.documentElement;
   const icon = document.getElementById('themeToggle');
@@ -282,46 +254,23 @@ function toggleTheme(){
   if(icon) icon.textContent = next === 'dark' ? '🌙' : '☀️';
 }
 
-/* ===============  VIBE SWITCH  =============== */
+/* CARD REVEAL */
 (function(){
-  const vibe = document.getElementById('vibeBtn');
-  if(!vibe) return;
-  vibe.addEventListener('click', toggleTheme);
-  vibe.addEventListener('dblclick', ()=>{ if (window.Confetti?.start) Confetti.start(); });
-})();
-
-/* ===============  CARD REVEAL ON SCROLL  =============== */
-(function(){
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const cards = document.querySelectorAll('.card');
-  if (prefersReduced) { cards.forEach(c=>c.classList.add('reveal')); return; }
   const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('reveal'); io.unobserve(e.target);} });
-  }, {threshold:0.1, rootMargin:"0px 0px -10% 0px"});
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('reveal');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.1});
   cards.forEach(c=>io.observe(c));
 })();
 
-/* ===============  FILTER BUTTONS  =============== */
-(function(){
-  const filters = document.querySelectorAll('.filter');
-  const cards = [...document.querySelectorAll('#projectGrid .card')];
-  filters.forEach(f=>{
-    f.addEventListener('click', ()=>{
-      filters.forEach(x=>x.classList.remove('active'));
-      f.classList.add('active');
-      const tag = f.dataset.tag;
-      cards.forEach(c=>{
-        const tags = (c.getAttribute('data-tags') || '').split(' ');
-        c.style.display = (tag === 'all' || tags.includes(tag)) ? '' : 'none';
-      });
-    });
-  });
-})();
-
-/* ===============  PROJECT SEARCH  =============== */
+/* SEARCH */
 (function(){
   const box = document.getElementById('projectSearch');
-  if(!box) return;
   const cards = [...document.querySelectorAll('#projectGrid .card')];
   box.addEventListener('input', ()=>{
     const q = box.value.trim().toLowerCase();
@@ -332,121 +281,19 @@ function toggleTheme(){
   });
 })();
 
-/* ===============  PDF MODAL  =============== */
-(function(){
-  const M = document.getElementById('pdfModal'),
-        F = document.getElementById('pdfFrame'),
-        T = document.getElementById('pdfTitle'),
-        C = document.getElementById('pdfClose');
-  if(!M) return;
-  document.addEventListener('click', e=>{
-    const a = e.target.closest('a.open-pdf'); if(!a) return;
-    e.preventDefault();
-    const href = a.getAttribute('href');
-    T.textContent = a.dataset?.title || 'Preview';
-    F.src = href;
-    M.style.display = 'block';
-    document.body.style.overflow='hidden';
-  });
-  const close = ()=>{ M.style.display='none'; F.src='about:blank'; document.body.style.overflow=''; };
-  C.addEventListener('click', close);
-  M.addEventListener('click', (e)=>{ if(e.target===M) close(); });
-  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && M.style.display==='block') close(); });
-})();
-
-/* ===============  PROGRESS BAR + ACTIVE SECTION  =============== */
-(function(){
-  const bar = document.getElementById('progress');
-  const links = [...document.querySelectorAll('nav a[href^="#"]')];
-  const secs = links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
-  const onScroll = ()=>{
-    const h = document.documentElement;
-    const p = (h.scrollTop)/(h.scrollHeight - h.clientHeight);
-    bar.style.width = (p*100)+'%';
-    let active = null, y = scrollY + innerHeight*0.35;
-    secs.forEach((s,i)=>{ if(s.offsetTop <= y) active = links[i]; });
-    links.forEach(l=>l.classList.toggle('active', l===active));
-  };
-  addEventListener('scroll', onScroll, {passive:true}); onScroll();
-})();
-
-/* ===============  RANDOM VIBE LINE  =============== */
+/* VIBE PLAYER */
 (function(){
   const el = document.getElementById('vibeNow');
-  if(!el) return;
   const tracks = [
     "Badli Si Hawa Hai",
     "HI-LO b2b Oliver Heldens",
-    "Late-night lofi focus",
-    "Kendrick deep cuts",
-    "Travis studio vibes"
+    "Lofi Focus Mix",
+    "Kendrick Lamar Deep Cuts",
+    "Travis Scott Studio Vibes"
   ];
   el.textContent = tracks[Math.floor(Math.random()*tracks.length)];
 })();
-
-/* ===============  CONFETTI  =============== */
-const Confetti=(function(){
-  let c,ctx,w,h,p=[],r=false,f;
-  function s(){w=c.width=innerWidth;h=c.height=innerHeight}
-  function g(n=150){p=[];for(let i=0;i<n;i++)p.push({x:Math.random()*w,y:Math.random()*-h*.2-20,r:Math.random()*2+2,vx:Math.random()*2-1,vy:Math.random()*2+2,a:Math.random()*6.28,va:Math.random()*.2-.1})}
-  function d(){ctx.clearRect(0,0,w,h);for(const o of p){o.x+=o.vx;o.y+=o.vy;o.a+=o.va;if(o.y>h+10)o.y=-10;ctx.save();ctx.translate(o.x,o.y);ctx.rotate(o.a);ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--btn-text')||'#111';ctx.fillRect(-o.r,-o.r,o.r*2,o.r*2);ctx.restore();}f=requestAnimationFrame(d);}
-  function start(){if(r)return;r=true;c.style.display='block';s();g();d();setTimeout(stop,1200);}
-  function stop(){r=false;cancelAnimationFrame(f);c.style.display='none';}
-  function init(){c=document.getElementById('confetti');if(!c)return;ctx=c.getContext('2d');s();addEventListener('resize',s);}
-  return{init,start};
-})();
-Confetti.init();
-document.addEventListener('keydown', e=>{ if(e.key.toLowerCase()==='v') Confetti.start(); });
-
-/* ===============  BACK-TO-TOP BUTTON  =============== */
-(function(){
-  const b=document.getElementById('topBtn');
-  const s=()=>{b.style.display=scrollY>600?'block':'none';};
-  addEventListener('scroll',s,{passive:true});s();
-})();
-
-/* ===============  LIVE-TYPING QUOTES  =============== */
-(function(){
-  const el=document.getElementById('quoteLine');if(!el)return;
-  const quotes=[
-    "“Without data, you’re just another person with an opinion.” — W. Edwards Deming",
-    "“In God we trust; all others must bring data.” — W. Edwards Deming",
-    "“What gets measured gets managed.” — Peter Drucker",
-    "“The goal is to turn data into information, and information into insight.” — Carly Fiorina",
-    "“Numbers have an important story to tell.” — Stephen Few"
-  ];
-  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let i=0,idx=0,type=true;const T=28,D=18,P=1200;
-  function loop(){
-    const q=quotes[i];
-    if(reduced){el.textContent=q;i=(i+1)%quotes.length;return setTimeout(loop,2000);}
-    if(type){el.textContent=q.slice(0,idx++);if(idx>q.length){type=false;return setTimeout(loop,P);}setTimeout(loop,T);}
-    else{el.textContent=q.slice(0,idx--);if(idx<0){type=true;i=(i+1)%quotes.length;return setTimeout(loop,200);}setTimeout(loop,D);}
-  }loop();
-})();
-
-/* ===============  AUTO-THEME SYNC  =============== */
-matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e=>{
-  const saved=localStorage.getItem('theme');
-  if(!saved){
-    document.documentElement.setAttribute('data-theme', e.matches?'dark':'light');
-    const icon=document.getElementById('themeToggle');
-    if(icon) icon.textContent=e.matches?'🌙':'☀️';
-  }
-});
-
-/* ===============  CONFETTI LONG-PRESS FOR MOBILE  =============== */
-(function(){
-  const vibe = document.getElementById('vibeBtn');
-  if(!vibe) return;
-  let timer;
-  vibe.addEventListener('touchstart', () => {
-    timer = setTimeout(() => {
-      if (window.Confetti?.start) Confetti.start();
-    }, 900); // 0.9s press
-  });
-  vibe.addEventListener('touchend', () => clearTimeout(timer));
-})();
 </script>
+
 </body>
 </html>
